@@ -1,0 +1,32 @@
+&m2dto3d_input_strings
+label_model_lambda_grid='m2dto3d_m51a_irr6',
+dir_grid='./2DTO3D_GRIDS/M51a_GRIDS/',
+dir_grid_2d = './2DTO3D_GRIDS/M51a_GRIDS/'
+label_model_2d= 'wd01_q06_t254_s790_no260_bd1_hd6000_zd160_hd1_4300_zd1_90_hs3800_zs190_hs1_4300_zs1_90_reff350_ell145_abs_irr6',
+grid_file='grid_m2dto3d_m51a_irr6_main.h5',
+grid_info_file='grid_m2dto3d_m51a_irr6_info.dat',
+file_lambda_list='lambda_list_m51a_dust.dat',
+units_lambda = 'um',
+dust_model = 'DraineLi06',
+file_av_opacities = './DUST_OPACITY/DraineLi06/kappagrainwd01_q06_effective.dat'
+subdivision_criteria = 'standard' 
+/ 
+&m2dto3d_input_var
+lambda_ref= 100.,   
+lambda_min= 3.4,    
+lambda_max= 500.,
+modelsize = 50000. ,
+base=3,3,   
+max_ncell=10.E6,  
+max_lvl=5,
+min_lvl=2, 
+max_dtau=0.01,
+max_dlum=0.5E-6
+z_subd_lim = 10 
+R_subd_lim = 10
+/
+&m2dto3d_input_logical
+input_av_opacities = .FALSE.
+/
+
+

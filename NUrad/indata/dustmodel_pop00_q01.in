@@ -1,0 +1,24 @@
+15
+912. 4.464  0.288  0.553
+1500. 2.086  0.395  0.608
+2800. 1.598  0.526  0.475
+3150. 1.405  0.528  0.491
+4430. 1.000  0.530  0.485
+5640. 0.759  0.527  0.443
+8090. 0.474  0.506  0.343
+12590. 0.225  0.411  0.161
+22000. 0.072  0.206  0.020
+2200. 2.506  0.418  0.488
+1350. 2.361  0.386  0.628
+1650. 1.881  0.423  0.605
+2000. 2.327  0.409  0.540
+2500. 1.913  0.509  0.461
+3650. 1.217  0.529  0.498
+
+dustmodel_pop00_q01.in
+dust model used by popescu et al 2000 and Tuffs et al 2004
+dust model specifying albedo and g factor
+first record gives total number of bands
+data record specify iband lambda kext albedo g 
+(where kext is the total (scattering + absorption) extinction) normalised
+to the corresponding value in B-band).
