@@ -7,7 +7,7 @@ file_dir_out = 'dir_out_galaxy.dat',
 file_lambda_list='lambda_list_m51a_dust.dat', 
 dir_runs='./RUNS/GALAXY_M51a/',
 dir_grid='./2DTO3D_GRIDS/M51a_GRIDS/',
-rt_algorithm='i_obs'
+rt_algorithm='i_obs',
 units_lambda = 'um',
 dust_model = 'DraineLi06',
 units_csize = 'pc',
@@ -15,7 +15,7 @@ units_luminosity = 'W/Hz',
 file_av_opacities = './DUST_OPACITY/DraineLi06/kappagrainwd01_q06_effective.dat'
 /
 &dartray_input_var
-lambda_ref = 100.
+lambda_ref=100,,
 kp_sca_max=1,    
 rad_lim=0.1, 
 accuracy=0.01, 
@@ -24,11 +24,11 @@ bm_par=5,
 bm_par_sca=5, 
 bm_par_max=2000, 
 max_lambda_stars = 850.,
-min_lambda_dust = 3.,
-dist_obs = 8.58E6
+min_lambda_dust = 3,
+dist_obs = 8580000,
 z_wall_coord = 0.3, 0.7, 
-npixel_maps = 1500.
-map_size_factor = 1.
+npixel_maps = 1500,
+map_size_factor = 1,
 kp_maps = 8
 /
 &dartray_input_logical

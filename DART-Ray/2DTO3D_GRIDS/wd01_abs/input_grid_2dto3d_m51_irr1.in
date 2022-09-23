@@ -17,11 +17,11 @@ lambda_min= 3.4,
 lambda_max= 500.,
 modelsize = 50000. ,
 base=3,3,   
-max_ncell=10.E6,  
+max_ncell=10000000,  
 max_lvl=5,
 min_lvl=2, 
 max_dtau=0.01,
-max_dlum=0.5E-6
+max_dlum=0.0000005
 z_subd_lim = 10 
 R_subd_lim = 10
 /

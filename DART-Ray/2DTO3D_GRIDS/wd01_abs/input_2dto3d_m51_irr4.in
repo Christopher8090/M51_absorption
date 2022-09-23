@@ -15,7 +15,7 @@ units_luminosity = 'W/Hz',
 file_av_opacities = './DUST_OPACITY/DraineLi06/kappagrainwd01_q06_effective.dat'
 /
 &dartray_input_var
-lambda_ref = 100.
+lambda_ref=100,
 kp_sca_max=1,    
 rad_lim=0.1, 
 accuracy=0.01, 
@@ -25,10 +25,10 @@ bm_par_sca=5,
 bm_par_max=2000, 
 max_lambda_stars = 850.,
 min_lambda_dust = 3.,
-dist_obs = 8.58E6
+dist_obs = 8580000,
 z_wall_coord = 0.3, 0.7, 
 npixel_maps = 1500
-map_size_factor = 1.
+map_size_factor = 1,
 kp_maps = 8
 /
 &dartray_input_logical
