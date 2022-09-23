@@ -23,8 +23,8 @@ PRO read_scaling, model, qyear, scaabs, tau, nsersic, sfr, sfr4, sfr6, sfr7, old
 ;
 ; Please ensure that this program is included in the directory you wish to use it in.
 ;
-root = '/nfs/d58/vlk/sedmodel/cinman/'	; root directory.
-indata = root+'m51a/NUrad_M51a/indata/'	; directory where both "scaling.in" and "ff_scaling.in" are contained.
+root = '/net/triangulum/work/cjinman/M51_absorption/'	; root directory.
+indata = root+'NUrad/indata/'	; directory where both "scaling.in" and "ff_scaling.in" are contained.
 
 filename = indata+'scaling.in'
 READCOL, filename, x, y, SKIPLINE=0, FORMAT="(A,D)"     ;read the data file, skip the first line (which is the number of lines in the file) and assign the data types to each entry
@@ -45,17 +45,6 @@ ffactor = (y[WHERE(x EQ 'ffactor')])[0]
 ffactor4 = (y[WHERE(x EQ 'ffactor4')])[0]
 ffactor6 = (y[WHERE(x EQ 'ffactor6')])[0]
 ffactor7 = (y[WHERE(x EQ 'ffactor7')])[0]
-if where(x eq 'qclump_ratio1') ne -1 then begin
-        qclump_ratio1 = (y[WHERE(x EQ 'qclump_ratio1')])[0]
-        qclump_ratio3 = (y[WHERE(x EQ 'qclump_ratio3')])[0]
-        qclump_ratio5 = (y[WHERE(x EQ 'qclump_ratio5')])[0]
-        mwuv = (y[where(x eq 'mwuv')])[0]
-endif else begin
-        qclump_ratio1 = 0
-        qclump_ratio3 = 0
-        qclump_ratio5 = 0
-        mwuv = 0
-endelse
 
 PRINT, 'model: '+STRTRIM(model,1)
 ;PRINT, 'qyear: '+STRTRIM(qyear,1)

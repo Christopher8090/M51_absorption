@@ -168,32 +168,27 @@ ztrun=84000.  ;in pc
 ztrun1=84000.  ;in pc
 
 
-filter_opt=['uv36','b','v','i','j','k','ir36','ir45','ir58'];,'nir']
+filter_opt=['uv36','b','v','i','j','k','ir36','ir45','ir58']
 dim_opt = n_elements(filter_opt)
 filter_uv = ['uv09','uv13','uv15','uv16','uv20','uv22','uv25','uv28','uv36']
 dim_uv = n_elements(filter_uv)
-filter = ['uv09','uv13','uv15','uv16','uv20','uv22','uv25','uv28','uv36','b','v','i','j','k','ir36','ir45','ir58'];,'nir']
+filter = ['uv09','uv13','uv15','uv16','uv20','uv22','uv25','uv28','uv36','b','v','i','j','k','ir36','ir45','ir58']
 dim = n_elements(filter)
 
-;lambda=[912.,1350.,1500.,1650.,2000.,2200.,2500.,2800.,3650.,4430.,5640.,8090.,12590.,22000.,50000.] * 1.d ;in AA
 lambda=[912.,1350.,1500.,1650.,2000.,2200.,2500.,2800.,3650.,4430.,5640.,8090.,12590.,22000.,36000.,45000.,58000.] * 1.d ;in AA
-;print, 'dim_uv', dim_uv
 ;the luminosity of the young stellar disk in W/Hz corresponding to
 ;SFR=1Msolar/yr
-;ll1 = [0.344,0.905,0.844,0.863,0.908,0.926,0.843,0.910,1.842,2.271,3.837,5.734,0.931,0.728,0.141] * 1.d+21
 ll1 = [0.344,0.905,0.844,0.863,0.908,0.926,0.843,0.910,1.842,2.271,3.837,5.734,0.931,0.728,0.141,0.141,0.141] * 1.d+21
 
 ;the luminosity of the old stellar disk in W/Hz corresponding to old=1
-;ll = [4.771,4.771,9.382,19.54,72.20,64.97,12.58] * 1.d+21
 ll = [4.771,4.771,9.382,19.54,72.20,64.97,12.58,12.58,12.58] * 1.d+21
 
 ;zero point to convert Jy in magnitude
-S0 = [460.,249.,460.,554.,710.,728.,759.,954.,1889.,4063.0d0,3636.0d0,2416.0d0,1589.0d0,640.0d0,280.9d0,179.9d0,115.0d0];,640.0d0]
+S0 = [460.,249.,460.,554.,710.,728.,759.,954.,1889.,4063.0d0,3636.0d0,2416.0d0,1589.0d0,640.0d0,280.9d0,179.9d0,115.0d0]
 
-S0_opt=[1889.0d0,4063.0d0,3636.0d0,2416.0d0,1589.0d0,640.0d0,280.9d0,179.9d0,115.0d0];,640.0d0]
+S0_opt=[1889.0d0,4063.0d0,3636.0d0,2416.0d0,1589.0d0,640.0d0,280.9d0,179.9d0,115.0d0]
 
 filename = 'geometry.in'
-
 name = rootdir+dir+dir2+filename
 openr, unit, name, /get_lun
 print, 'read ', name
@@ -268,17 +263,17 @@ readf, unit, rtrun
 readf, unit, ss
 readf, unit, sharp
 readf, unit, ss
-readf, unit,rtrund
+readf, unit, rtrund
 readf, unit, ss
-readf, unit,sharpd1
+readf, unit, sharpd1
 readf, unit, ss
 readf, unit, rtrun1
 readf, unit, ss
 readf, unit, sharp1
 readf, unit, ss
-readf, unit,rtrund1
+readf, unit, rtrund1
 readf, unit, ss
-readf, unit,sharpd1
+readf, unit, sharpd1
 readf, unit, ss
 readf, unit, reff
 readf, unit, ss
@@ -371,17 +366,17 @@ readf, unit, rtrun3
 readf, unit, ss
 readf, unit, sharp3
 readf, unit, ss
-readf, unit,rtrund3
+readf, unit, rtrund3
 readf, unit, ss
-readf, unit,sharpd3
+readf, unit, sharpd3
 readf, unit, ss
 readf, unit, rtrun4
 readf, unit, ss
 readf, unit, sharp4
 readf, unit, ss
-readf, unit,rtrund4
+readf, unit, rtrund4
 readf, unit, ss
-readf, unit,sharpd4
+readf, unit, sharpd4
 readf, unit, ss
 readf, unit, xis3
 readf, unit, ss
@@ -468,17 +463,17 @@ readf, unit, rtrun5
 readf, unit, ss
 readf, unit, sharp5
 readf, unit, ss
-readf, unit,rtrund5
+readf, unit, rtrund5
 readf, unit, ss
-readf, unit,sharpd5
+readf, unit, sharpd5
 readf, unit, ss
 readf, unit, rtrun6
 readf, unit, ss
 readf, unit, sharp6
 readf, unit, ss
-readf, unit,rtrund6
+readf, unit, rtrund6
 readf, unit, ss
-readf, unit,sharpd6
+readf, unit, sharpd6
 readf, unit, ss
 readf, unit, xis5
 readf, unit, ss
@@ -559,22 +554,22 @@ snsersic=strcompress(string(round(nsersic)),/remove_all)
 sinclination=strcompress(string(round(inclination)),/remove_all)
 
 if (morph eq 'td' or morph eq 'tdi' or morph eq 'tdo' or morph eq 'ntd') then begin
-   dim_filter = dim
-   filter = filter
-   scaabs = scaabs
+	dim_filter = dim
+	filter = filter
+	scaabs = scaabs
 endif
 if (morph eq 'd' or morph eq 'di' or morph eq 'do') then begin
-   dim_filter = dim_opt
-   filter = filter_opt
-   scaabs = scaabs
+	dim_filter = dim_opt
+	filter = filter_opt
+	scaabs = scaabs
 endif
 
 if morph eq 'b' then begin
-   dim_filter = dim_opt
-   filter = filter_opt
-   snsersic=strcompress(string(round(nsersic)),/remove_all)
-   scalebulge,model,qyear,tau,scaabs,nsersic,bulge_disk	; added 21/04/21 CJI
-   scaabs=scaabs
+	dim_filter = dim_opt
+	filter = filter_opt
+	snsersic = strcompress(string(round(nsersic)),/remove_all)
+	scalebulge,model,qyear,tau,scaabs,nsersic,bulge_disk	; added 21/04/21 CJI
+	scaabs = scaabs
 endif
 
 hs=[h_bdisk,h_bdisk,h_vdisk,h_idisk,h_jdisk,h_kdisk,h_kdisk,h_ir36disk,h_ir45disk,h_ir58disk] * 1000.d
@@ -673,8 +668,8 @@ if (morph eq 'do') then begin
 endif
 
 if (morph eq 'ntd') then begin
-   ff = factord7_young
-   S0_JJT = S0
+	ff = factord7_young
+	S0_JJT = S0
 endif
 
 if (morph eq 'b') then  begin
@@ -686,7 +681,7 @@ if (morph eq 'b') then  begin
 	mstep2=mstep2_b
 	mlength2=mlength2_b
 	mstep3=mstep3_b	
-   elm=elm_b
+	elm=elm_b
 endif
 
 if (morph eq 'ntd') then  begin
@@ -698,7 +693,7 @@ if (morph eq 'ntd') then  begin
 	mstep2=mstep2_n
 	mlength2=mlength2_n
 	mstep3=mstep3_n
-   elm=elm_n		
+	elm=elm_n		
 endif
 
 if (morph eq 'tdi' or morph eq 'di') then  begin
@@ -710,7 +705,7 @@ if (morph eq 'tdi' or morph eq 'di') then  begin
 	mstep2=mstep2_i
 	mlength2=mlength2_i
 	mstep3=mstep3_i
-   elm=elm_i		
+	elm=elm_i		
 endif
 
 if (morph eq 'td' or morph eq 'd') then  begin
@@ -722,7 +717,7 @@ if (morph eq 'td' or morph eq 'd') then  begin
 	mstep2=mstep2_m
 	mlength2=mlength2_m
 	mstep3=mstep3_m
-   elm=elm_m		
+	elm=elm_m		
 endif
 
 if (morph eq 'tdo' or morph eq 'do') then  begin
@@ -734,83 +729,79 @@ if (morph eq 'tdo' or morph eq 'do') then  begin
 	mstep2=mstep2_o
 	mlength2=mlength2_o
 	mstep3=mstep3_o
-   elm=elm_o		
+	elm=elm_o		
 endif
 
-   print,'mstep2',mstep2
-   print,'mlength2',mlength2
-   print,'mstep3',mstep3
-  
 for ii = 0, dim_filter-1 do begin ;loop in wavelength
- if filter[ii] eq 'nir' then begin
-  if ( morph eq 'td' or morph eq 'tdi' or morph eq 'tdo' or morph eq 'ntd') then  begin
-                 filename = $
-                'map_m'+morph+'_k_'+model+'_q'+qyear+$
-                '_i'+sinclination+'_t'+stau+'_'+scaabs+'.dat'
-                 filenameout = 'map_m'+morph+'_k_'+model+'_q'+qyear+$
-                 '_i'+sinclination+'_t'+stau+$
-                  '_hd'+shd+'_zd'+szd+'_hd1_'+shd1+'_zd1_'+szd1+$
-                  '_hs1_'+shs1+'_zs1_'+szs1+$
-                    '_'+scaabs;+'.fits'  
-  endif   
-  if (morph eq 'd' or morph eq 'di' or morph eq 'do') then begin
-		 filename = $
-                'map_m'+morph+'_k_'+model+'_q'+qyear+$
-                '_i'+sinclination+'_t'+stau+'_'+scaabs+'.dat'
-                 filenameout = $
-                 'map_m'+morph+'_k_'+model+'_q'+qyear+$
-                 '_i'+sinclination+'_t'+stau+$
-                  '_hd'+shd+'_zd'+szd+'_hd1_'+shd1+'_zd1_'+szd1+$
-                  '_hs'+shs+'_zs'+szs+$
-                            '_'+scaabs;+'.fits'
-   endif
-   if morph eq 'b' then begin
-		 filename = $
-                'map_m'+morph+'_k_'+model+'_q'+qyear+$
-                '_i'+sinclination+'_t'+stau+'_n'+snsersic+'_'+scaabs+'.dat'
-                 filenameout = $
-                 'map_m'+morph+'_k_'+model+'_q'+qyear+$
-                 '_i'+sinclination+'_t'+stau+$
-                  '_hd'+shd+'_zd'+szd+'_hd1_'+shd1+'_zd1_'+szd1+$
-                  '_reff'+sreff+'_ell'+sellipt+'_n'+snsersic+'_'+scaabs;+'.fits' 
-   endif
- endif else begin
-  if (morph eq 'td' or morph eq 'tdi' or morph eq 'tdo' or morph eq 'ntd') then begin
-		 filename = $
-                'map_m'+morph+'_'+filter[ii]+'_'+model+'_q'+qyear+$
-                '_i'+sinclination+'_t'+stau+'_'+scaabs+'.dat' 
-		 filenameout = $
-                 'map_m'+morph+'_'+filter[ii]+'_'+model+'_q'+qyear+$
-                 '_i'+sinclination+'_t'+stau+$
-                  '_hd'+shd+'_zd'+szd+'_hd1_'+shd1+'_zd1_'+szd1+$
-                  '_hs1_'+shs1+'_zs1_'+szs1+$
-                    '_'+scaabs;+'.fits'  
-  endif
-  if (morph eq 'd' or morph eq 'di' or morph eq 'do') then begin
-		 filename = $
-		'map_m'+morph+'_'+filter[ii]+'_'+model+'_q'+qyear+$
-                '_i'+sinclination+'_t'+stau+'_'+scaabs+'.dat'
-                 filenameout = $
-                 'map_m'+morph+'_'+filter[ii]+'_'+model+'_q'+qyear+$
-                 '_i'+sinclination+'_t'+stau+$
-                  '_hd'+shd+'_zd'+szd+'_hd1_'+shd1+'_zd1_'+szd1+$
-                  '_hs'+shs+'_zs'+szs+$
-                            '_'+scaabs;+'.fits'
-  endif
-  if morph eq 'b' then  begin
+if filter[ii] eq 'nir' then begin
+	if ( morph eq 'td' or morph eq 'tdi' or morph eq 'tdo' or morph eq 'ntd') then  begin
 		filename = $
-                'map_m'+morph+'_'+filter[ii]+'_'+model+'_q'+qyear+$
-                '_i'+sinclination+'_t'+stau+'_n'+snsersic+'_'+scaabs+'.dat'
-                 filenameout = $
-                 'map_m'+morph+'_'+filter[ii]+'_'+model+'_q'+qyear+$
-                 '_i'+sinclination+'_t'+stau+$
-                  '_hd'+shd+'_zd'+szd+'_hd1_'+shd1+'_zd1_'+szd1+$
-                  '_reff'+sreff+'_ell'+sellipt+'_n'+snsersic+'_'+scaabs;+'.fits'
-  endif
- endelse
- name = rootdir+dir+'/out/'+filename
- print, 'read ', name
- openr,unit,name,/get_lun
+		'map_m'+morph+'_k_'+model+'_q'+qyear+$
+		'_i'+sinclination+'_t'+stau+'_'+scaabs+'.dat'
+		filenameout = 'map_m'+morph+'_k_'+model+'_q'+qyear+$
+		'_i'+sinclination+'_t'+stau+$
+		'_hd'+shd+'_zd'+szd+'_hd1_'+shd1+'_zd1_'+szd1+$
+		'_hs1_'+shs1+'_zs1_'+szs1+$
+		'_'+scaabs;+'.fits'  
+	endif   
+	if (morph eq 'd' or morph eq 'di' or morph eq 'do') then begin
+		filename = $
+		'map_m'+morph+'_k_'+model+'_q'+qyear+$
+		'_i'+sinclination+'_t'+stau+'_'+scaabs+'.dat'
+		filenameout = $
+		'map_m'+morph+'_k_'+model+'_q'+qyear+$
+		'_i'+sinclination+'_t'+stau+$
+		'_hd'+shd+'_zd'+szd+'_hd1_'+shd1+'_zd1_'+szd1+$
+		'_hs'+shs+'_zs'+szs+$
+		'_'+scaabs;+'.fits'
+	endif
+	if morph eq 'b' then begin
+		filename = $
+		'map_m'+morph+'_k_'+model+'_q'+qyear+$
+		'_i'+sinclination+'_t'+stau+'_n'+snsersic+'_'+scaabs+'.dat'
+		filenameout = $
+		'map_m'+morph+'_k_'+model+'_q'+qyear+$
+		'_i'+sinclination+'_t'+stau+$
+		'_hd'+shd+'_zd'+szd+'_hd1_'+shd1+'_zd1_'+szd1+$
+		'_reff'+sreff+'_ell'+sellipt+'_n'+snsersic+'_'+scaabs;+'.fits' 
+	endif
+endif else begin
+	if (morph eq 'td' or morph eq 'tdi' or morph eq 'tdo' or morph eq 'ntd') then begin
+		filename = $
+		'map_m'+morph+'_'+filter[ii]+'_'+model+'_q'+qyear+$
+		'_i'+sinclination+'_t'+stau+'_'+scaabs+'.dat' 
+		filenameout = $
+		'map_m'+morph+'_'+filter[ii]+'_'+model+'_q'+qyear+$
+		'_i'+sinclination+'_t'+stau+$
+		'_hd'+shd+'_zd'+szd+'_hd1_'+shd1+'_zd1_'+szd1+$
+		'_hs1_'+shs1+'_zs1_'+szs1+$
+		'_'+scaabs;+'.fits'  
+	endif
+	if (morph eq 'd' or morph eq 'di' or morph eq 'do') then begin
+		filename = $
+		'map_m'+morph+'_'+filter[ii]+'_'+model+'_q'+qyear+$
+		'_i'+sinclination+'_t'+stau+'_'+scaabs+'.dat'
+		filenameout = $
+		'map_m'+morph+'_'+filter[ii]+'_'+model+'_q'+qyear+$
+		'_i'+sinclination+'_t'+stau+$
+		'_hd'+shd+'_zd'+szd+'_hd1_'+shd1+'_zd1_'+szd1+$
+		'_hs'+shs+'_zs'+szs+$
+		'_'+scaabs;+'.fits'
+	endif
+	if morph eq 'b' then  begin
+		filename = $
+		'map_m'+morph+'_'+filter[ii]+'_'+model+'_q'+qyear+$
+		'_i'+sinclination+'_t'+stau+'_n'+snsersic+'_'+scaabs+'.dat'
+		filenameout = $
+		'map_m'+morph+'_'+filter[ii]+'_'+model+'_q'+qyear+$
+		'_i'+sinclination+'_t'+stau+$
+		'_hd'+shd+'_zd'+szd+'_hd1_'+shd1+'_zd1_'+szd1+$
+		'_reff'+sreff+'_ell'+sellipt+'_n'+snsersic+'_'+scaabs;+'.fits'
+	endif
+endelse
+name = rootdir+dir+'/out/'+filename
+print, 'read ', name
+openr,unit,name,/get_lun
 
 
 ;read in counts
@@ -910,14 +901,10 @@ if (mopt eq 1) then begin
 	endfor
 	inrb = where (z eq -1,nrb)
 	if nrb gt 0 then z(inrb) = 0.
-;;;
 
 	totalcount1 = mstep1 * total(z[1:mlength1,0:ny-1])
-	print,'totalcount1',totalcount1
 	totalcount2 = mstep2 * total(z[mlength1+1:mlength2,0:ny-1])
-	print,'totalcount2',totalcount2
 	totalcount3 = mstep3 * total(z[mlength2+1:nx-1,0:ny-1])
-	print,'totalcount3',totalcount3
 	z_tot = (totalcount1 + totalcount2 + totalcount3)+ total(z[0:0,0:ny-1]) ;total is only half what the full galaxy would be
 
 endif else begin ;resume as normal if no mask
@@ -954,7 +941,6 @@ z_cal=z*z_count_Jy*ff[ii] ;calibrated surface brightness
 free_lun,unit
 nameout=rootdir+dir+dir1+filenameout+'.fits'
 print, 'write', nameout
-print, max(z_cal)
 writefits,nameout,z_cal
 endfor
 end
