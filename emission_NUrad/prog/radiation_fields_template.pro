@@ -6,10 +6,7 @@
 ;JJT 19MAR18 decouple dust and stellar truncation radii
 
 
-;pro radiation_fields_template,model,qyear,tau,sfr,old,bd,scaabs,nsersic
-pro radiation_fields_template,model,qyear,tau,sfr,sfr4,sfr6,sfr7,old,old3,old5,bd,scaabs,nsersic,swdisk3,swdisk4,swdisk5,swdisk6,swdisk7 ;added by JJT 6/10/17
-;radiation_fields_template,'wd01','06',3.8,2.28,0.2,0.09,'sca',1. ;call for MW
-;radiation_fields_template,'wd01','06',1.11,0.,0.,0.7,0.,0.,0.2,0.0,'abs',4. ;call for M33
+pro radiation_fields_template,swdisk3,swdisk4,swdisk5,swdisk6,swdisk7
 
 ;input parameters:
 ; model - the dust model used (e.g. 'wd01' or 'pop00' refers to the model of
@@ -31,14 +28,23 @@ pro radiation_fields_template,model,qyear,tau,sfr,sfr4,sfr6,sfr7,old,old3,old5,b
 start_time = systime(/seconds)
 ;common dirdef,rootdir
 close,/all
-
-;get directories from ./mydirectories.in BTC 2019-11-18
 common scaling
+;get directories from ./mydirectories.in BTC 2019-11-18
+;ss=''
+;urad_dir=''
+;emission_dir=''
+;OPENR, dirunit, 'mydirectories.in', /GET_LUN
+;	READF, dirunit, ss
+;	READF, dirunit, urad_dir
+;	READF, dirunit, ss
+;	READF, dirunit, emission_dir
+;FREE_LUN, dirunit
 
 dir = urad_dir+'indata/'
 dir1 = urad_dir+'unit/'
 dir2 = emission_dir+'indata/'
 
+rootdir = '../../'
 common param, shd, szd, shd1, szd1, shs, szs, shs1, szs1, sreff, sellipt
 
 filter_opt=['uv36','b','v','i','j','k','ir36','ir45','ir58'];,'nir']
@@ -266,9 +272,9 @@ ibulge='no'
 idisk3='no' ;added by JJT 6/10/17
 idisk5='no' ;added by JJT 6/10/17
 for ii = 0, dim_uv-1 do begin
- readwrite_rf_template,filter(ii),ibulge,idisk,idisk3,idisk5,model,qyear,tau,sfr,sfr4,sfr6,sfr7,old,old3,old5,bd,$ ;added by JJT 6/10/17
-             nsersic,scaabs,ff_b(ii),ff_d(ii),ff_td(ii),ff_d3(ii),ff_td4(ii),ff_d5(ii),ff_td6(ii),ff_td7(ii),dir1,dir2,$;added by JJT 6/10/17
-             swdisk3,swdisk4,swdisk5,swdisk6,swdisk7  ;added by JJT 31/10/18
+readwrite_rf_template,filter[ii],ibulge,idisk,idisk3,idisk5,$
+ff_b[ii],ff_d[ii],ff_td[ii],ff_d3[ii],ff_td4[ii],ff_d5[ii],ff_td6[ii],ff_td7[ii],$
+dir1,dir2,swdisk3,swdisk4,swdisk5,swdisk6,swdisk7
 endfor
 
 ;define idisk and ibulge in the optical
@@ -277,9 +283,9 @@ if old3 eq 0. then idisk3='no' else idisk3='yes' ;added by JJT 6/10/17
 if old5 eq 0. then idisk5='no' else idisk5='yes' ;added by JJT 6/10/17
 if bd eq 0. then ibulge='no' else ibulge='yes'
 for ii = dim_uv, dim-1 do begin
- readwrite_rf_template,filter(ii),ibulge,idisk,idisk3,idisk5,model,qyear,tau,sfr,sfr4,sfr6,sfr7,old,old3,old5,bd,$ ;added by JJT 6/10/17
-             nsersic,scaabs,ff_b(ii),ff_d(ii),ff_td(ii),ff_d3(ii),ff_td4(ii),ff_d5(ii),ff_td6(ii),ff_td7(ii),dir1,dir2,$;added by JJT 6/10/17
-             swdisk3,swdisk4,swdisk5,swdisk6,swdisk7  ;added by JJT 31/10/18
+readwrite_rf_template,filter[ii],ibulge,idisk,idisk3,idisk5,$
+ff_b[ii],ff_d[ii],ff_td[ii],ff_d3[ii],ff_td4[ii],ff_d5[ii],ff_td6[ii],ff_td7[ii],$
+dir1,dir2,swdisk3,swdisk4,swdisk5,swdisk6,swdisk7
     
 endfor
 print, 'Done: radiation_fields_unit_template.pro ('+strtrim(ceil(systime(/seconds)-start_time),1)+' s)'

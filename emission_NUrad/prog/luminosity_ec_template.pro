@@ -1,8 +1,7 @@
 ;this program read the files with the probability distribution in temperature
 ;for each grain compositions and calculates the infrared emissivity in
 ;W/m^2/Sr/AA 
-pro luminosity_ec_template,model,qyear,tau,sfr,old,bd,scaabs,check 
-; luminosity_ec_template,'wd01','06',3.8,2.28,0.2,0.09,'sca','no' call for MW
+pro luminosity_ec_template,check 
 
 ; input:
 ; model - dust model, e.g. 'wd01'
@@ -195,12 +194,12 @@ sreff=strcompress(string(round(reff*1000.)),/remove_all)
 sellipt=strcompress(string(round(ellipt*100.)),/remove_all)
 
 ;read the file with the dust model parameters and grain size distribution
-if model eq 'wd01' then namer1=rootdir+dir+'grain_sizeswd01_q'+qyear+'.dat'
-if model eq 'lmc1' then namer1=rootdir+dir+'grain_sizeslmc1_q'+qyear+'.dat'
-if model eq 'wd01_c60' then namer1=rootdir+dir+'grain_sizeswd01_q'+qyear+'.dat'
-if model eq 'wd01_c50' then namer1=rootdir+dir+'grain_sizeswd01_q'+qyear+'.dat'
-if model eq 'wd01_c40' then namer1=rootdir+dir+'grain_sizeswd01_q'+qyear+'.dat'
-if model eq 'wd01_c30' then namer1=rootdir+dir+'grain_sizeswd01_q'+qyear+'.dat'
+if model eq 'wd01' then namer1 = dir+'grain_sizeswd01_q'+qyear+'.dat'
+if model eq 'lmc1' then namer1 = dir+'grain_sizeslmc1_q'+qyear+'.dat'
+if model eq 'wd01_c60' then namer1 = dir+'grain_sizeswd01_q'+qyear+'.dat'
+if model eq 'wd01_c50' then namer1 = dir+'grain_sizeswd01_q'+qyear+'.dat'
+if model eq 'wd01_c40' then namer1 = dir+'grain_sizeswd01_q'+qyear+'.dat'
+if model eq 'wd01_c30' then namer1 = dir+'grain_sizeswd01_q'+qyear+'.dat'
 openr,unit11,namer1,/get_lun
 ss = ' '
 dim_size = 0L
@@ -368,19 +367,19 @@ Q_abs_new[*,*] = Q_abs[*,iwave]
   readf, unit1, newbd
   ;check that the input parameters read from the file are the same as those
   ;inputed to the program (since we have a multiple definition of parameters)
-  if newtau ne tau then begin
+  if double(newtau)-tau ge 0.001 then begin
      print, 'unexpected tau in PT file; program stops'
      goto, mark3
   endif
-  if newsfr ne sfr then begin
+  if double(newsfr)-sfr ge 0.001 then begin
      print, 'unexpected sfr in PT file; program stops'
      goto, mark3
   endif
-  if newbd ne bd then begin
+  if double(newbd)-bd ge 0.001 then begin
      print, 'unexpected bd in PT file; program stops'
      goto, mark3
   endif
-  if newold ne old then begin
+  if double(newold)-old ge 0.001 then begin
      print, 'unexpected old in PT file; program stops'
      goto, mark3
   endif
@@ -390,7 +389,7 @@ Q_abs_new[*,*] = Q_abs[*,iwave]
   if j eq 0L then begin 
      tau1 = newtau1 
   endif else begin
-     if newtau1 ne tau1 then begin
+     if double(newtau1)-tau1 ge 0.001 then begin
         print, 'unexpected tau1; program stops'
         goto, mark3
      endif
@@ -400,7 +399,7 @@ Q_abs_new[*,*] = Q_abs[*,iwave]
   if j eq 0L then begin 
      hd = newhd 
   endif else begin
-     if newhd ne hd then begin
+     if double(newhd)-hd ge 0.001 then begin
         print, 'unexpected hd; program stops'
         goto, mark3
      endif
@@ -410,7 +409,7 @@ Q_abs_new[*,*] = Q_abs[*,iwave]
   if j eq 0L then begin 
      zd = newzd 
   endif else begin
-     if newzd ne zd then begin
+     if double(newzd)-zd ge 0.001 then begin
         print, 'unexpected zd; program stops'
         goto, mark3
      endif
@@ -428,7 +427,7 @@ Q_abs_new[*,*] = Q_abs[*,iwave]
   if j eq 0L then begin 
      tau2 = newtau2 
   endif else begin
-     if newtau2 ne tau2 then begin
+     if double(newtau2)-tau2 ge 0.001 then begin
         print, 'unexpected tau2; program stops'
         goto, mark3
      endif
@@ -438,7 +437,7 @@ Q_abs_new[*,*] = Q_abs[*,iwave]
   if j eq 0L then begin 
      hd1 = newhd1 
   endif else begin
-     if newhd1 ne hd1 then begin
+     if double(newhd1)-hd1 ge 0.001 then begin
         print, 'unexpected hd1; program stops'
         goto, mark3
      endif
@@ -448,7 +447,7 @@ Q_abs_new[*,*] = Q_abs[*,iwave]
   if j eq 0L then begin 
      zd1 = newzd1 
   endif else begin
-     if newzd1 ne zd1 then begin
+     if double(newzd1)-zd1 ge 0.001 then begin
         print, 'unexpected zd1; program stops'
         goto, mark3
      endif
@@ -724,19 +723,19 @@ Q_abs_new[*,*] = Q_abs[*,iwave]
   readf, unit5, newbd
   ;check that the input parameters read from the file are the same as those
   ;inputed to the program (since we have a multiple definition of parameters)
-  if newtau ne tau then begin
+  if double(newtau)-tau ge 0.001 then begin
      print, 'unexpected tau in energy absorbed file; program stops'
      goto, mark3
   endif
-  if newsfr ne sfr then begin
+  if double(newsfr)-sfr ge 0.001 then begin
      print, 'unexpected sfr in energy absorbed file; program stops'
      goto, mark3
   endif
-  if newbd ne bd then begin
+  if double(newbd)-bd ge 0.001 then begin
      print, 'unexpected bd in energy absorbed file; program stops'
      goto, mark3
   endif
-  if newold ne old then begin
+  if double(newold)-old ge 0.001 then begin
      print, 'unexpected old in energy absorbed file; program stops'
      goto, mark3
   endif

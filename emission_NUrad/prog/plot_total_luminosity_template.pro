@@ -1,7 +1,6 @@
 ;this program plots the integrated FIR SED of a galaxy 
 
-pro plot_total_luminosity_template,model,qyear,tau,sfr,old,bd,scaabs,swheatr
-;plot_total_luminosity_template, 'wd01','06',25.4,7.9,2.6,0.01,'abs','no'
+pro plot_total_luminosity_template,swheatr
 
 start_time = systime(/seconds)
 common scaling
@@ -160,19 +159,19 @@ readf, unit1, ss
 readf, unit1, newbd
 ;check that the input parameters read from the file are the same as those
 ;inputed to the program (since we have a multiple definition of parameters)
-if newtau ne tau then begin
+if abs(double(newtau)-tau) ge 0.001 then begin
 	print, 'unexpected tau in total lum file; program stops'
 	goto, mark1
 endif
-if newsfr ne sfr then begin
+if abs(double(newsfr)-sfr) ge 0.001 then begin
 	print, 'unexpected sfr in total lum file; program stops'
 	goto, mark1
 endif
-if newbd ne bd then begin
+if abs(double(newbd)-bd) ge 0.001 then begin
 	print, 'unexpected bd in total lum file; program stops'
 	goto, mark1
 endif
-if newold ne old then begin
+if abs(double(newold)-old) ge 0.001 then begin
 	print, 'unexpected old in total lum file; program stops'
 	goto, mark1
 endif
@@ -283,14 +282,13 @@ print,'int_lum_diff [W]', int_lum_diff
 ;shortwards of 912 A, and 2.495 * 1.d+43 erg/sec of non-ionising radiation from
 ;912 A to 4430 A. Only 0.3 of the ionising radiation goes into heating the
 ;dust, the rest goes into the recombination lines
-;sfr_loc = lum_loc/(2.495 * 1.d+43 * 1.d-7 + 0.3 * 0.267 * 1.d+43 * 1.d-7)
 
 free_lun, unit1
 
 urad_save_dir = urad_dir+'saves/model/'
 i=0
 wavelengths=['uv15']
-restore, urad_save_dir+model+'_datafile_'+wavelengths[i]+'_'+scaabs+'.save'
+;restore, urad_save_dir+model+'_datafile_'+wavelengths[i]+'_'+scaabs+'.save'
 
 
 print, 'DONE: plot_total_luminosity_template.pro ('+strtrim(ceil(systime(/seconds)-start_time),1)+' s)'

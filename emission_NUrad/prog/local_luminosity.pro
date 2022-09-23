@@ -1,5 +1,5 @@
 ;this program produces a HII template scaled to the sfr and ffactor required
-pro local_luminosity,model,qyear,tau,sfr,sfr4,sfr6,sfr7,old,bd,scaabs
+pro local_luminosity
 
 start_time = systime(/seconds)
 common scaling
@@ -157,19 +157,19 @@ readf, unit1, newold
 readf, unit1, ss
 readf, unit1, newbd
 ;check that the input parameters read from the file are the same as those
-if newtau ne tau then begin
+if abs(double(newtau)-tau) ge 0.001 then begin
 	print, 'unexpected tau in total lum file; program stops'
 	goto, mark1
 endif
-if newsfr ne sfr then begin
+if abs(double(newsfr)-sfr) ge 0.001 then begin
 	print, 'unexpected sfr in total lum file; program stops'
 	goto, mark1
 endif
-if newbd ne bd then begin
+if abs(double(newbd)-bd) ge 0.001 then begin
 	print, 'unexpected bd in total lum file; program stops'
 	goto, mark1
 endif
-if newold ne old then begin
+if abs(double(newold)-old) ge 0.001 then begin
 	print, 'unexpected old in total lum file; program stops'
 	goto, mark1
 endif
