@@ -433,16 +433,23 @@ cgplot, x_rad_model, av_int_rad_HII,  linestyle=1, color='cyan', /overplot
 cgplot, x_rad_model, av_int_rad_HII4, linestyle=1, color='cyan', /overplot
 cgplot, x_rad_model, av_int_rad_tot,  linestyle=0, color='red', /overplot
 
-cgLegend, colors=['black','red','green','orange','blue','green','orange','blue','cyan'], $
+if wavelength[i] eq 3.6 or wavelength[i] eq 4.5 or wavelength[i] eq 5.8 then begin
+	cgLegend, colors=['black','red','green','orange','blue','green','orange','blue','cyan'], $
         linestyle=[0,0,2,2,2,1,1,1,1], $
-        title=['obs','model','inner thin','main thin','outer thin','inner thick','main thick','outer thick','HII'], $
+        title=['obs','model','inner thin','main thin','outer thin','inner thick','main thick','outer thick','HII'],$
         length=0.03, location=[0.75,0.9], vspace=4
+endif else begin
+	cgLegend, colors=['black','red','grey','grey','cyan'],$
+	linestyle=[0,0,1,2,1], $
+	title=['obs','model','Thick dust','Thin dust','HII'],$
+	length=0.03, location=[0.75,0.9], vspace=4
+endelse
 
 cgplot, [xmin,xmax], [20,20], color="blue", linestyle=2, position=[0.17,0.1,0.95,0.25], $
         ytitle="R [%]", xrange=[xmin,xmax], xtitle='Radius, [kpc]', /NoErase, yrange=[-50,50], yticks=1
 cgplot, [xmin,xmax], [-20,-20], color="blue", linestyle=2, /overplot
 cgplot, [xmin,xmax], [0,0], color="black", /overplot
-cgplot, x_rad_model, resi, color='red', /overplot
+cgplot, x_rad, resi, color='red', /overplot
 
 device, /close_file
 cgfixps, plotname

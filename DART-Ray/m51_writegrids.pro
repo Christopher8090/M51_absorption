@@ -621,6 +621,7 @@ lum_hii4 = eta4
 lum_hii6 = eta6
 lum_hii7 = eta7
 if type_grid eq 'irr_HII4' and max(lum_hii4) eq 0. then continue
+if type_grid eq 'irr_HII6' and max(lum_hii6) eq 0. then continue
 if type_grid eq 'irr_HII7' and max(lum_hii7) eq 0. then continue
 lambda = lambda *1d-4
 
