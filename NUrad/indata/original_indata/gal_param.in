@@ -1,0 +1,141 @@
+diagnostics(0=no,1=yes)
+1
+prof_lim[kpc]
+25.
+izero(0=abs,10=sca)
+0
+dust_model(wd01_q06/pop00_q01)
+wd01_q06
+dist[Mpc]
+8.58
+inclination[deg]
+20.3
+map options
+pixel size[arcsec]
+1.
+nx_b(bulge)
+100
+ny_b
+50
+nx_n(nuclear)
+100
+ny_n
+50
+nx_i(inner)
+200
+ny_i
+100
+nx_m(main)
+400
+ny_m
+200
+nx_o(outer)
+1000
+ny_o
+500
+strip mask options
+mask bulge(1=yes)
+0
+mask nuclear(1=yes)
+0
+mask inner(1=yes)
+0
+mask main(1=yes)
+0
+mask outer(1=yes)
+0
+bulge steps
+mstep1_b[pxls]
+1
+mlength1_b
+5
+mstep2_b
+5
+mlength2_b
+100
+mstep3_b
+15
+nuclear steps
+mstep1_n[pxls]
+1
+mlength1_n
+5
+mstep2_n
+5
+mlength2_n
+100
+mstep3_n
+10
+inner steps
+mstep1_i[pxls]
+5
+mlength1_i
+20
+mstep2_i
+5
+mlength2_i
+20
+mstep3_i
+5
+main steps
+mstep1_m[pxls]
+1
+mlength1_m
+50
+mstep2_m
+2
+mlength2_m
+100
+mstep3_m
+5
+outer steps
+mstep1_o[pxls]
+1
+mlength1_o
+300
+mstep2_o
+2
+mlength2_o
+400
+mstep3_o
+9
+elliptical mask radius
+elm_b
+0
+elm_n
+0
+elm_i
+0
+elm_m
+0
+elm_o
+0
+
+Description of parameters:
+
+Diagnostics - When turned on this tells the code to print the emissivity and opacity profiles to a file in the file "out/profiles". These profiles can be used as a sanity check for the geometry of the model.
+
+Prof_lim - Defines the truncation radius of the diagnostic profiles.
+
+izero - Sets the model to be absorption only (extinction) or scattering (attenuation).
+
+dust_model - This sets the dust model to be used in your model. Dust models currently avaliable in the "indata" directory are those of Weingartner & Draine (2001), and the dust model used in Popescu (2000) and Tuffs et al (2004).
+
+dist - Sets the distance to the modelled galaxy in Mpc.
+
+Inclination - Sets the inclination of the model in degrees.
+
+Pixel size - The size of each pixel on the surface brightness map in arcseconds.
+
+X is a place holder for the following parameters b, n, i, m, o are for the bulge, nuclear, inner, main, and outer components respectively.
+
+nx_X, Ny_X - The number of pixels in the surface brightness maps along the vertical and horizonal direction axis respectively. NB - Make sure the total physical size of the map fully covers the extent of the  modelled component.
+
+mask X - Are triggers which let you turn on strip masks for your model. Using these masks can significantly decrease computation time for large maps.
+
+N is a placeholder for 1, 2, or 3.
+mstepN_X - Number steps along the horizontal axis. In each step there is 1 unmasked vertical strip, and mstepN_X-1 masked vertical strips.
+
+mlengthN_X - The number of vertical strips which mstepN_X is valid. For example if mlengthN_X=100 and mstepN_X=5 there will be 20 unmasked vertical strips, and 80 masked vertical strips.    
+
+elm_X - The radius along the major axis an ellitical mask. Set this equal to 0 for no mask. This mask is useful for components which have a hole in the centre. Using the elliptical masks for these components will significantly decrease the computation time for large maps.
