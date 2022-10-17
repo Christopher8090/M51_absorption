@@ -33,3 +33,4 @@
 .r radiation_fields_template
 .r readwrite_rf_template
 .r sed_model
+.r read_scaling

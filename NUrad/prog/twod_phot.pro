@@ -17,16 +17,17 @@ start
 read_scaling, model, qyear, scaabs, tau, nsersic, sfr, sfr4, sfr6, sfr7, old, old3, old5, bd, ffactor, ffactor4, ffactor6, ffactor7, f_uv, f_uv4, f_uv6, f_uv7, f_BVIK, f_BVIK3, f_BVIK5, f_bd
 
 print_text = 0	; to print information about each step, set to 1.
-root = '/nfs/d58/vlk/sedmodel/cinman/m51a/NUrad_M51a/'
-map_dir = root+'out/'
+root = '../../'
+nurad_dir = root+'NUrad/'
+map_dir = nurad_dir+'out/'
 save_dir = root+'saves/model/'
-figdir = root+'figures/model/'
-emiss_dir = root+'../emission_NUrad_M51a/indata/'
+figdir = root+'figures/'
+emiss_dir = root+'/emission_NUrad/indata/'
 kernel_dir = root+'maps/obs/kernels/'
 
 ss=''
-name = root+'indata/geometry.in'
-openr,unit,name,/get_lun
+fname = nurad_dir+'indata/geometry.in'
+openr, unit, fname, /get_lun
 readf, unit, ss
 readf, unit, tau1
 readf, unit, ss
@@ -173,9 +174,8 @@ strbd = strcompress(string(fix(bd*100.)),/remove_all)
 stau = strcompress(string(fix(tau*10.)),/remove_all)
 snsersic = strcompress(string(fix(nsersic)),/remove_all)
 
-filename_param = root+'indata/gal_param.in'
-name_param = filename_param
-openr,unit,name_param,/get_lun
+fname = nurad_dir+'indata/gal_param.in'
+openr, unit, fname, /get_lun
 readf, unit, ss
 readf, unit, ss
 readf, unit, ss
@@ -212,6 +212,7 @@ readf, unit, nx_o
 readf, unit, ss
 readf, unit, ny_o
 free_lun, unit
+
 sinclination=strcompress(string(fix(inclination)),/remove_all)
 wave_option=['uv09','uv13','uv15','uv16','uv20','uv22','uv25','uv28','uv36','b','v','i','j','k','ir36','ir45','ir58']
 lambda=[912.,1350.,1500.,1650.,2000.,2200.,2500.,2800.,3650.,4430.,5640.,8090.,12590.,22000.,36000.,45000.,58000.]*1.d ;angstrom
@@ -221,12 +222,9 @@ dist_m = distance_pc * pc_m ; distance to the galaxy in [m]
 flux_to_lum = (4d*!DPI*dist_m^2d) *1D-26  ; factor converting from flux to luminosity [Jy]->[W/Hz]
 inc = STRCOMPRESS(STRING(FIX(ROUND(inclination))), /REMOVE_ALL)	; inclination from gal_param, truncated for later files
 pixsize_model = pix_size
-read, combined, prompt='Combine wd01 and lmc1 dust models? [1]=yes:'
-read, intrin, prompt="Do photometry on intrinsic maps? [1]=yes:"
+read, intrin, prompt="Do photometry on intrinsic maps? [1]=yes [0]=no: "
+
 FOR i = 0, N_ELEMENTS(lambda)-1 DO BEGIN
-;FOR i = 14, 16 DO BEGIN	; NUV
-;FOR i = 11, 12 DO BEGIN	; b band
-;i = 9
 wavelength = wave_option[i]
 obs_data=''
 IF lambda[i] EQ 912. THEN obs_data = ''
@@ -253,67 +251,6 @@ IF obs_data NE '' THEN BEGIN
 	PRINT, ''
 	PRINT,'Obs_data: '+obs_data+' Model_data: '+wavelength
 ENDIF
-;-------------------------------------- COMBINED MODEL --------------------------------------------------
-if combined eq 1 then begin
-model = 'lmc1'
-scaabs = 'sca'
-read_scaling_geom, model, scaabs, qyear, tau, nsersic, sfr, sfr4, sfr6, sfr7, old, old3, old5, bd, ffactor, ffactor4, ffactor6, ffactor7, f_uv, f_uv4, f_uv6, f_uv7, f_BVIK, f_BVIK3, f_BVIK5, f_bd, hs, shd, szd, shd1, szd1, shs, szs, shs1, szs1, sreff, sellipt, strsfr, strold, strbd, stau, snsersic, sinclination
-lmc_sfr4 = sfr4
-lmc_old = old
-lmc_old3 = old3
-lmc_bd = bd
-lmc_ffactor4 = ffactor4
-lmc_f_uv4 = f_uv4
-lmc_f_BVIK3 = f_BVIK3
-lmc_f_bd = f_bd
-if intrin eq 1 then stau='0'
-bulge_param = wavelength+'_'+model+'_q'+qyear+'_i'+inc+'_t'+stau+$
-                '_hd'+shd+'_zd'+szd+'_hd1_'+shd1+'_zd1_'+szd1+$
-                '_reff'+sreff+'_ell'+sellipt+'_n'+snsersic+'_'+scaabs+'.fits'
-
-model_param = wavelength+'_'+model+'_q'+qyear+'_i'+inc+'_t'+stau+$
-                '_hd'+shd+'_zd'+szd+'_hd1_'+shd1+'_zd1_'+szd1+$
-                '_hs1_'+shs1+'_zs1_'+szs1+'_'+scaabs+'.fits'
-
-old_stellar = wavelength+'_'+model+'_q'+qyear+'_i'+inc+'_t'+stau+$
-                '_hd'+shd+'_zd'+szd+'_hd1_'+shd1+'_zd1_'+szd1+$
-                '_hs'+shs+'_zs'+szs+'_'+scaabs+'.fits'
-
-b_model_map   = map_dir+'map_mb_'+bulge_param   ; bulge map
-di_model_map  = map_dir+'map_mdi_'+old_stellar  ; inner old stellar map
-tdi_model_map = map_dir+'map_mtdi_'+model_param ; inner young stellar map
-ntd_model_map = map_dir+'map_mntd_'+model_param ; nuclear thin stellar map
-
-model = 'wd01'
-scaabs = 'sca'
-read_scaling_geom, model, scaabs, qyear, tau, nsersic, sfr, sfr4, sfr6, sfr7, old, old3, old5, bd, ffactor, ffactor4, ffactor6, ffactor7, f_uv, f_uv4, f_uv6, f_uv7, f_BVIK, f_BVIK3, f_BVIK5, f_bd, hs, shd, szd, shd1, szd1, shs, szs, shs1, szs1, sreff, sellipt, strsfr, strold, strbd, stau, snsersic, sinclination, dist_in, pix_size, nx_b, nx_n, nx_i, nx_o, nx_m
-wd_sfr = sfr
-wd_sfr6 = sfr6
-wd_old = old
-wd_old5 = old5
-wd_ffactor = ffactor
-wd_ffactor6 = ffactor6
-wd_f_uv = f_uv
-wd_f_uv6 = f_uv6
-wd_f_BVIK = f_BVIK
-wd_f_BVIK5 = f_BVIK5
-if intrin eq 1 then stau='0'
-model_param = wavelength+'_'+model+'_q'+qyear+'_i'+inc+'_t'+stau+$
-                '_hd'+shd+'_zd'+szd+'_hd1_'+shd1+'_zd1_'+szd1+$
-                '_hs1_'+shs1+'_zs1_'+szs1+'_'+scaabs+'.fits'
-
-old_stellar = wavelength+'_'+model+'_q'+qyear+'_i'+inc+'_t'+stau+$
-                '_hd'+shd+'_zd'+szd+'_hd1_'+shd1+'_zd1_'+szd1+$
-                '_hs'+shs+'_zs'+szs+'_'+scaabs+'.fits'
-
-d_model_map   = map_dir+'map_md_'+old_stellar   ; main old stellar map
-td_model_map  = map_dir+'map_mtd_'+model_param  ; main young stellar map
-do_model_map  = map_dir+'map_mdo_'+old_stellar  ; outer old stellar map
-tdo_model_map = map_dir+'map_mtdo_'+model_param ; outer young stellar map
-print, 'lmc1+wd01 model maps read.'
-model = 'combined'
-endif else begin
-;--------------------------------------------------------------------------------------------------------
 ;-------------------------------------- SINGLE MODEL -----------------------------------------------------
 if intrin eq 1 then stau='0'
 read_scaling, model, qyear, scaabs, tau, nsersic, sfr, sfr4, sfr6, sfr7, old, old3, old5, bd, ffactor, ffactor4, ffactor6, ffactor7, f_uv, f_uv4, f_uv6, f_uv7, f_BVIK, f_BVIK3, f_BVIK5, f_bd
@@ -339,7 +276,6 @@ do_model_map  = map_dir+'map_mdo_'+old_stellar  ; outer old stellar map
 tdo_model_map = map_dir+'map_mtdo_'+model_param ; outer young stellar map
 ntd_model_map = map_dir+'map_mntd_'+model_param ; nuclear thin stellar map
 print, model+' maps read.'
-endelse
 ;--------------------------------------------------------------------------------------------------------
 map_nx = [nx_n, nx_i, nx_m, nx_o, nx_b]	; array of map sizes for each component in [pixels]
 len = MAX(map_nx)	; the number of different components in map_nx
@@ -506,7 +442,7 @@ IF print_test_fits EQ 1 THEN BEGIN
 ENDIF
 ;-----------------------------------------------------------------------------------------
 ;-------------------------------- CONVOLVE MODEL MAP -------------------------------------
-convolve_model = 1      ; set to 1 to convolve the model, set to 0 to skip this step.
+convolve_model = 0      ; set to 1 to convolve the model, set to 0 to skip this step.
 conv_affix = ''
 IF convolve_model EQ 1 THEN BEGIN
 kernel = ''
@@ -568,20 +504,6 @@ lum_lunit_nu = 2.241d+36
 lum_lunit_diff_nu = 1.437d+36 ;in W
 
 ff = dblarr(dim)
-if combined eq 1 then begin
-ff_td = wd_sfr * f_diff * (lum_lunit_nu/lum_lunit_diff_nu) * wd_f_uv    ; scale factor for main young disk. eqn (26) PT11
-ff_td4 = lmc_sfr4 * f_diff * (lum_lunit_nu/lum_lunit_diff_nu) * lmc_f_uv4       ; scale factor for inner young disk
-ff_td6 = wd_sfr6 * f_diff * (lum_lunit_nu/lum_lunit_diff_nu) * wd_f_uv6 ; scale factor for young outer disk
-ff_td7 = sfr7 * f_diff * (lum_lunit_nu/lum_lunit_diff_nu) * f_uv7       ; scale factor for nuclear thin disk
-ff_d = ff       ; scale factor for main old disk
-ff_d3 = ff      ; scale factor for inner old disk
-ff_d5 = ff      ; scale factor for outer old disk
-ff_b = ff       ; scale factor for bulge
-ff_d[(dim-dim_opt):(dim-1)]=(wd_old/corr_old) * wd_f_BVIK       ; scale factor for main old disk. eqn (25) PT11
-ff_d3[(dim-dim_opt):(dim-1)]=(lmc_old3/corr_old) * lmc_f_BVIK3  ; scale factor for inner old disk
-ff_d5[(dim-dim_opt):(dim-1)]=(wd_old5/corr_old) * wd_f_BVIK5    ; scale factor for outer old disk
-ff_b[(dim-dim_opt):(dim-1)]= lmc_old * lmc_f_bd * lmc_bd        ; scale factor for bulge
-endif else begin
 ff_td = sfr * f_diff * (lum_lunit_nu/lum_lunit_diff_nu) * f_uv  ; scale factor for main young disk. eqn (26) PT11
 ff_td4 = sfr4 * f_diff * (lum_lunit_nu/lum_lunit_diff_nu) * f_uv4       ; scale factor for inner young disk
 ff_td6 = sfr6 * f_diff * (lum_lunit_nu/lum_lunit_diff_nu) * f_uv6       ; scale factor for young outer disk
@@ -594,7 +516,6 @@ ff_d[(dim-dim_opt):(dim-1)]=(old/corr_old) * f_BVIK     ; scale factor for main 
 ff_d3[(dim-dim_opt):(dim-1)]=(old3/corr_old) * f_BVIK3  ; scale factor for inner old disk
 ff_d5[(dim-dim_opt):(dim-1)]=(old5/corr_old) * f_BVIK5  ; scale factor for outer old disk
 ff_b[(dim-dim_opt):(dim-1)]= old * f_bd * bd    ; scale factor for bulge
-endelse
 
 IF (result_b EQ 1) THEN BEGIN
 	b_data = b_data[*,*] * ff_b[i]	; apply correction factor to the bulge
@@ -863,14 +784,9 @@ xmin = 0
 xmax = 17.5
 ymax = max(av_int_rad_model, /NaN) *1.5
 ymin = ymax * 1e-3
-if combined eq 1 then begin
-	plotname = figdir+'combined_sb_profile_'+wavelength+'_'+scaabs+'.ps'
-	IF stau EQ 0 THEN plotname = figdir+'combined_sb_profile_t0_'+wavelength+'_'+scaabs+'.ps'
-endif else begin
-	plotname = figdir+model+'_sb_profile_'+wavelength+'_'+scaabs+'.ps'
-	IF stau EQ 0 THEN plotname = figdir+model+'_sb_profile_t0_'+wavelength+'_'+scaabs+'.ps'
-endelse
-plotname = figdir+'sb_profile_'+model+'_q'+qyear+'_t'+stau+'_sfr'+strsfr+'_old'+strold+'_bd'+strbd+'_'+savewave[i]+'_'+scaabs+'.ps'
+plotname = figdir+model+'_sb_profile_'+wavelength+'_'+scaabs+'.ps'
+IF stau EQ 0 THEN plotname = figdir+model+'_sb_profile_t0_'+wavelength+'_'+scaabs+'.ps'
+;plotname = figdir+'sb_profile_'+model+'_q'+qyear+'_t'+stau+'_sfr'+strsfr+'_old'+strold+'_bd'+strbd+'_'+savewave[i]+'_'+scaabs+'.ps'
 aspect = cgpswindow()
 thisdevice = !D.NAME
 set_plot, 'ps', /copy
@@ -914,13 +830,8 @@ endif
 PRINT, 'Max intensity profile value - obs: ', STRTRIM(MAX(int_rad,/NaN),1), ' [MJy]  model: ', STRTRIM(MAX(int_rad_model,/NaN),1), ' [MJy]'
 
 save_name = save_dir+'model_'+savewave[i]+'_'+model+'_q'+qyear+'_i'+inc+'_t'+stau+'_hd'+shd+'_hd1_'+shd1+'_reff'+sreff+'_ell'+sellipt+scaabs+'_sfr'+strsfr+'_old'+strold+'_bd'+strbd+'.save'
-if combined eq 1 then begin
-	save_name = save_dir+'combined_datafile_'+wavelength+'_'+scaabs+'.save'
-	IF stau EQ 0 THEN save_name = save_dir+'combined_t'+stau+'_datafile_'+wavelength+'_'+scaabs+'.save'
-endif else begin
-	save_name = save_dir+model+'_datafile_'+wavelength+'_'+scaabs+'.save'
-	IF stau EQ 0 THEN save_name = save_dir+model+'_t'+stau+'_datafile_'+wavelength+'_'+scaabs+'.save'
-endelse
+save_name = save_dir+model+'_datafile_'+wavelength+'_'+scaabs+'.save'
+IF stau EQ 0 THEN save_name = save_dir+model+'_t'+stau+'_datafile_'+wavelength+'_'+scaabs+'.save'
 SAVE, x_rad_model, av_int_rad_model, int_rad_model, area_model, $
 	av_int_rad_b, av_int_rad_di, av_int_rad_d, av_int_rad_do, $
 	av_int_rad_ntd, av_int_rad_tdi, av_int_rad_td, av_int_rad_tdo, $

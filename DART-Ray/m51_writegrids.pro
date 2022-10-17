@@ -1,7 +1,6 @@
 PRO m51_writegrids, tau, sfr, old, bd, ffactor 
 compile_opt idl2
-;m51_write_grids, 23.1, 7.2, 2.8, 0.012, 0.01
-;m51_write_grids, 23.1, 7.5, 2.7, 0.005, 0.
+
 ; This program takes the IDL emissivity files for the different dust
 ; components (calculated using the 2D RT code) and extracts the values
 ; only for a set of input wavelengths. Depending on the keyword
@@ -24,14 +23,14 @@ compile_opt idl2
 ; OUTPUT 
 ; monochromatic 2D grid files within directory './INPUT_GRIDS/.  
 
-root = '/nfs/d58/vlk/sedmodel/cinman/'	; root directory.
-dir_nurad = root+'m51a/NUrad_M51a/'	; NUrad directory.
+root = '../'	; root directory.
+dir_nurad = root+'NUrad/'	; NUrad directory.
 dir_nurad_out = dir_nurad+'out/'	; directory containing output data from NUrad.
 dir_nurad_indata = dir_nurad+'indata/'	; directory containing geometry input paramter files.
-dir_emiss_intlum = root+'m51a/emission_NUrad_M51a/outdata_intlum/'     ; directory for emission data.
+dir_emiss_intlum = root+'emission_NUrad/outdata_intlum/'     ; directory for emission data.
 dir_out = './2DTO3D_GRIDS/M51a_GRIDS/'	; directory for grids to be outputted.
 
-read_scaling, model, qyear, scaabs, tau, nsersic, sfr, sfr4, sfr6, sfr7, old, old3, old5, bd, ffactor, ffactor4, ffactor6, ffactor7, f_uv, f_uv4, f_uv6, f_uv7, f_BVIK, f_BVIK3, f_BVIK5, f_bd, qclump_ratio1, qclump_ratio3, qclump_ratio5, mwuv
+read_scaling, model, qyear, scaabs, tau, nsersic, sfr, sfr4, sfr6, sfr7, old, old3, old5, bd, ffactor, ffactor4, ffactor6, ffactor7, f_uv, f_uv4, f_uv6, f_uv7, f_BVIK, f_BVIK3, f_BVIK5, f_bd
 
 ss = ''
 filename_param = 'gal_param.in'
@@ -256,8 +255,6 @@ readf, unit, ss
 readf, unit, idisk1
 readf, unit, ss
 readf, unit, idisk2
-; JJT 13/10/17
-
 ;read inner component
 readf, unit, ss
 readf, unit, ss
@@ -354,7 +351,6 @@ readf, unit, ss
 readf, unit, idisk3
 readf, unit, ss
 readf, unit, idisk4
-;JJT 13/10/17
 ;read outer component
 readf, unit, ss
 readf, unit, ss
@@ -518,9 +514,7 @@ strold = strcompress(string(round(old*100.)),/REMOVE_ALL)
 strbd = strcompress(string(round(bd*100.)),/REMOVE_ALL)
 stau = strcompress(string(round(tau*10.)),/REMOVE_ALL)
 sffactor = strcompress(string(round(ffactor*100.)),/REMOVE_ALL)
-sqclump_ratio = strcompress(string(round(qclump_ratio1*100)),/remove_all)
 sinclination = strcompress(string(round(inclination)),/REMOVE_ALL)
-smwuv = strcompress(string(round(mwuv*10)),/remove_all)
 
 snsersic = strcompress(string(round(nsersic)),/REMOVE_ALL)
 ;------------------------------------ FILE NAMES IN EMISSION/OUT_LUM --------------------------------------------
@@ -565,13 +559,6 @@ file_hii = 'grid_irr_HII_'+model+'_q'+qyear+ '_t'+stau+'_s'+strsfr+'_no'+strold+
 if file_test(dir_emiss_intlum+file_hii) then begin
 	type_grid_arr = [type_grid_arr, 'irr_HII', 'irr_HII4', 'irr_HII6', 'irr_HII7']
 	print,file_hii
-endif
-file_clump = 'grid_irr_clump_'+model+'_q'+qyear+'_t'+stau+'_s'+strsfr+'_no'+strold+$
-	     '_bd'+strbd+'_hd'+shd+'_zd'+szd+'_hd1_'+shd1+'_zd1_'+szd1+'_hs'+shs+'_zs'+szs+$
-	     '_hs1_'+shs1+'_zs1_'+szs1+'_reff'+sreff+'_ell'+sellipt+'_mwuv'+smwuv+'.xdr'
-if file_test(dir_emiss_intlum+file_clump) then begin
-	type_grid_arr = [type_grid_arr, 'irr_clump1']
-	print,file_clump
 endif
 print, type_grid_arr
 ;------------------------------------------------------------------------------------------------------------
@@ -634,22 +621,12 @@ lum_hii4 = eta4
 lum_hii6 = eta6
 lum_hii7 = eta7
 if type_grid eq 'irr_HII4' and max(lum_hii4) eq 0. then continue
+if type_grid eq 'irr_HII6' and max(lum_hii6) eq 0. then continue
 if type_grid eq 'irr_HII7' and max(lum_hii7) eq 0. then continue
+lambda = lambda *1d-4
 
-if file_test(dir_emiss_intlum+file_clump) eq 1 then begin
-	restore, dir_emiss_intlum+file_clump
-	lum_clump1 = lumdouble_clump
-	;lum_clump3 = lumdouble_clump3
-	;lum_clump5 = lumdouble_clump5
-endif else begin 
-	lum_clump1 = 0.
-	lambda = lambda*1d-4
-endelse
 print, type_grid, count
 if (type_grid ne 'tot') then begin	; zeroes every other component if the total isn't being calculated.
-	if (type_grid ne 'irr_clump1') then lum_clump1 = 0
-	;if (type_grid ne 'irr_clump3') then lum_clump3 = 0
-	;if (type_grid ne 'irr_clump5') then lum_clump5 = 0
 	if (type_grid ne 'irr_HII') then lum_hii = 0
 	if (type_grid ne 'irr_HII4') then lum_hii4 = 0
 	if (type_grid ne 'irr_HII6') then lum_hii6 = 0
@@ -667,7 +644,7 @@ nz = n_elements(r_arr[0,*])	; number of elements in the height sampling.
 n_lambda = n_elements(lambda)	; number of wavelengths emission is calculated for.
 
 lum_tot = lum_diff1 + lum_diff2 + lum_diff3 + lum_diff4 + lum_diff5 + lum_diff6 +$
-		lum_hii + lum_hii4 + lum_hii6 + lum_hii7 + lum_clump1; + lum_clump3 + lum_clump5
+		lum_hii + lum_hii4 + lum_hii6 + lum_hii7
 lum_tot_ext = dblarr(nr,nz)
 
 for il = 0, n_elements(lambda_arr)-1 do begin	; loop through each wavelength in lambda_arr
@@ -697,7 +674,7 @@ for il = 0, n_elements(lambda_arr)-1 do begin	; loop through each wavelength in 
 	printf, unit10, ' R [pc]      Z [pc]     j_nu   [W/Hz/pc^3]    krho  [pc^-1]'
 	for i = 0,nr -1 do begin
 		for j = 0,nz -1 do begin
-			printf, unit10, r_arr[i,j],z_arr[i,j],lum_tot_ext[i,j], 0.
+			printf, unit10, r_arr[i,j], z_arr[i,j], lum_tot_ext[i,j], 0.
 		endfor
 	endfor
 	free_lun, unit10

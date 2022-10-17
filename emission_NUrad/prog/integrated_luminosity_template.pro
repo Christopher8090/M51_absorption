@@ -10,7 +10,7 @@
 ;10/07/18 BTC updated to be able to disable extra components.
 ;29/11/18 JJT updated to allow calculation of heating due to different stellar components 
 
-pro integrated_luminosity_template,model,qyear,tau,sfr,sfr4,sfr6,sfr7,old,old3,old5,bd,scaabs,dr_req,dz_req,swdisk3,swdisk4,swdisk5,swdisk6,swheatr
+pro integrated_luminosity_template,dr_req,dz_req,swdisk3,swdisk4,swdisk5,swdisk6,swheatr
 ;integrated_luminosity_template,'wd01','06',3.8,2.28,0.2,0.09,'sca',100.,25.,'yes','yes','yes','yes' ;call for MW
 ;integrated_luminosity_template,'wd01','06',25.4,7.8,5.8,1.,0.,2.5,1.45,0.7,0.01,'abs',100.,25.,'yes','yes','yes','yes','no'
 
@@ -506,12 +506,12 @@ hs6tin=hs6tin*10d^3.
 hd6tin=hd6tin*10d^3.
 
 ;read the information about grain composition
-if model eq 'wd01' then namer1=rootdir+dir+'grain_sizeswd01_q'+qyear+'.dat'
-if model eq 'lmc1' then namer1=rootdir+dir+'grain_sizeslmc1_q'+qyear+'.dat'
-if model eq 'wd01_c60' then namer1=rootdir+dir+'grain_sizeswd01_q'+qyear+'.dat'
-if model eq 'wd01_c50' then namer1=rootdir+dir+'grain_sizeswd01_q'+qyear+'.dat'
-if model eq 'wd01_c40' then namer1=rootdir+dir+'grain_sizeswd01_q'+qyear+'.dat'
-if model eq 'wd01_c30' then namer1=rootdir+dir+'grain_sizeswd01_q'+qyear+'.dat'
+if model eq 'wd01' then namer1 = dir+'grain_sizeswd01_q'+qyear+'.dat'
+if model eq 'lmc1' then namer1 = dir+'grain_sizeslmc1_q'+qyear+'.dat'
+if model eq 'wd01_c60' then namer1 = dir+'grain_sizeswd01_q'+qyear+'.dat'
+if model eq 'wd01_c50' then namer1 = dir+'grain_sizeswd01_q'+qyear+'.dat'
+if model eq 'wd01_c40' then namer1 = dir+'grain_sizeswd01_q'+qyear+'.dat'
+if model eq 'wd01_c30' then namer1 = dir+'grain_sizeswd01_q'+qyear+'.dat'
 openr, unit11, namer1,/get_lun
 readf, unit11, ss
 readf, unit11, dim_comp
@@ -555,19 +555,19 @@ readf, unit1, ss
 readf, unit1, newbd
 ;check that the input parameters read from the file are the same as those
 ;inputed to the program (since we have a multiple definition of parameters)
-if newtau ne tau then begin
+if abs(double(newtau)-tau) ge 0.001 then begin
 	print, 'unexpected tau in lum file; program ;stops'
 	goto, mark1
 endif
-if newsfr ne sfr then begin
+if abs(double(newsfr)-sfr) ge 0.001 then begin
 	print, 'unexpected sfr in lum file; program ;stops'
 	goto, mark1
 endif
-if newbd ne bd then begin
+if abs(double(newbd)-bd) ge 0.001 then begin
 	print, 'unexpected bd in lum file; program ;stops'
 	goto, mark1
 endif
-if newold ne old then begin
+if abs(double(newold)-old) ge 0.001 then begin
 	print, 'unexpected old in lum file; program ;stops'
 	goto, mark1
 endif
@@ -576,7 +576,7 @@ readf, unit1, newtau1
 if jj eq 0L then begin 
 	tau1 = newtau1 
 endif else begin
-	if newtau1 ne tau1 then begin
+	if abs(double(newtau1)-tau1) then begin
 		print, 'unexpected tau1; program ;stops'
 		goto, mark1
 	endif
@@ -586,7 +586,7 @@ readf, unit1, newhd ;in pc
 if jj eq 0L then begin 
 	hd = newhd 
 endif else begin
-	if newhd ne hd then begin
+	if abs(double(newhd)-hd) ge 0.001 then begin
 		print, 'unexpected hd1; program ;stops'
 		goto, mark1
 	endif
@@ -596,7 +596,7 @@ readf, unit1, newzd ;in pc
 if jj eq 0L then begin 
 	zd = newzd 
 endif else begin
-	if newzd ne zd then begin
+	if abs(double(newzd)-zd) ge 0.001 then begin
 		print, 'unexpected zd1; program ;stops'
 		goto, mark1
 	endif
@@ -614,7 +614,7 @@ readf, unit1, newtau2
 if jj eq 0L then begin 
 	tau2 = newtau2 
 endif else begin
-	if newtau2 ne tau2 then begin
+	if abs(double(newtau2)-tau2) ge 0.001 then begin
 		print, 'unexpected tau2; program ;stops'
 		goto, mark1
 	endif
@@ -624,7 +624,7 @@ readf, unit1, newhd1 ;in pc
 if jj eq 0L then begin 
 	hd1 = newhd1 
 endif else begin
-	if newhd1 ne hd1 then begin
+	if abs(double(newhd1)-hd1) ge 0.001 then begin
 		print, 'unexpected hd2; program ;stops'
 		goto, mark1
 	endif
@@ -634,7 +634,7 @@ readf, unit1, newzd1 ;in pc
 if jj eq 0L then begin 
 	zd1 = newzd1 
 endif else begin
-	if newzd1 ne zd1 then begin
+	if abs(double(newzd1)-zd1) ge 0.001 then begin
 		print, 'unexpected zd2; program ;stops'
 		goto, mark1
 	endif
@@ -753,19 +753,19 @@ readf, unit5, newbd
 
 ;check that the input parameters read from the file are the same as those
 ;inputed to the program (since we have a multiple definition of parameters)
-if newtau ne tau then begin
+if abs(double(newtau)-tau) ge 0.001 then begin
 	print, 'unexpected tau in lum file; program ;stops'
 	goto, mark1
 endif
-if newsfr ne sfr then begin
+if abs(double(newsfr)-sfr) ge 0.001 then begin
 	print, 'unexpected sfr in lum file; program ;stops'
 	goto, mark1
 endif
-if newbd ne bd then begin
+if abs(double(newbd)-bd) ge 0.001 then begin
 	print, 'unexpected bd in lum file; program ;stops'
 	goto, mark1
 endif
-if newold ne old then begin
+if abs(double(newold)-old) ge 0.001 then begin
 	print, 'unexpected old in lum file; program ;stops'
 	goto, mark1
 endif

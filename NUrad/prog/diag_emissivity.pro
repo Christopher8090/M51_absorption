@@ -4,16 +4,16 @@ PRO diag_emissivity
 ; Produces radial profiles at a height z=0 for the wavelengths specified in the `wavelength` array.
 
 ;------------------------------------------------ DEFINE DIRECTORIES -------------------------------------------
-root = '/nfs/d58/vlk/sedmodel/cinman/m51a/'
-em_dir = root+'emission_NUrad_M51a/outdata_intlum/'
-out_dir = root+'NUrad_M51a/figures/emissivity_diag_plots/'
-savedir = root+'NUrad_M51a/saves/model/'
+root = '/net/triangulum/work/cjinman/M51_absorption/'
+em_dir = root+'emission_NUrad/outdata_intlum/'
+out_dir = root+'NUrad/figures/emissivity_diag_plots/'
+savedir = root+'NUrad/saves/model/'
 ;---------------------------------------------------------------------------------------------------------------
 ;---------------------------------------------- DEFINE INPUT PARAMETERS ----------------------------------------
 read_scaling, model, qyear, scaabs, tau, nsersic, sfr, sfr4, sfr6, sfr7, old, old3, old5, bd, ffactor, ffactor4, ffactor6, ffactor7, f_uv, f_uv4, f_uv6, f_uv7, f_BVIK, f_BVIK3, f_BVIK5
 
 ss=''
-name = root+'NUrad_M51a/indata/geometry.in'
+name = root+'NUrad/indata/geometry.in'
 openr,unit,name,/get_lun
 readf, unit, ss
 readf, unit, tau1

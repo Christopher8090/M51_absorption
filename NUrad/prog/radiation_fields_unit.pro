@@ -702,216 +702,213 @@ if (morph eq 'td' or morph eq 'tdi' or morph eq 'tdo' or morph eq 'ntd') then be
 	printf, unit1, idisk2
 endif
 if (morph eq 'd' or morph eq 'di' or morph eq 'do') then begin
-	filename1 = 'unit_m'+morph+'_'+filter[ii]+'_'+model+'_q'+qyear+$
-                  '_t'+stau+$
-                  '_hd'+shd+'_zd'+szd+'_hd1_'+shd1+'_zd1_'+szd1+$
-                  '_hs'+shs+'_zs'+szs+$
-                  '_'+scaabs+'.dat'
+	filename1 = 'unit_m'+morph+'_'+filter[ii]+'_'+model+'_q'+qyear+'_t'+stau+$
+		    '_hd'+shd+'_zd'+szd+'_hd1_'+shd1+'_zd1_'+szd1+'_hs'+shs+'_zs'+szs+'_'+scaabs+'.dat'
 	name1 = rootdir+dir+dir1+filename1
 	openw,unit1,name1,/get_lun
 	print, 'write ', name1
 
  ;read the header of the radiation fields files
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, tau1
-  printf, unit1, tau1
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, hd
-  printf, unit1, hd
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, zd
-  printf, unit1, zd
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, hdin
-  printf, unit1, hdin
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, zdin
-  printf, unit1, zdin
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, hdsolar
-  printf, unit1, hdsolar
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, zdsolar
-  printf, unit1, zdsolar
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, tau2
-  printf, unit1, tau2
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, hd1
-  printf, unit1, hd1
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, zd1
-  printf, unit1, zd1
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, hd1in
-  printf, unit1, hd1in
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, zd1in
-  printf, unit1, zd1in
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, hd1solar
-  printf, unit1, hd1solar
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, zd1solar
-  printf, unit1, zd1solar
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, pass
-  printf, unit1, pass
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, zs
-  printf, unit1, zs
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, hsin
-  printf, unit1, hsin
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, zsin
-  printf, unit1, zsin
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, hssolar
-  printf, unit1, hssolar
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, zssolar
-  printf, unit1, zssolar
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, rtrun
-  printf, unit1, rtrun
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, xis0
-  printf, unit1, xis0
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, xid0
-  printf, unit1, xid0
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, xid1
-  printf, unit1, xid1
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, idisk1
-  printf, unit1, idisk1
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, idisk2
-  printf, unit1, idisk2
+readf, unit, ss
+printf, unit1, ss
+readf, unit, tau1
+printf, unit1, tau1
+readf, unit, ss
+printf, unit1, ss
+readf, unit, hd
+printf, unit1, hd
+readf, unit, ss
+printf, unit1, ss
+readf, unit, zd
+printf, unit1, zd
+readf, unit, ss
+printf, unit1, ss
+readf, unit, hdin
+printf, unit1, hdin
+readf, unit, ss
+printf, unit1, ss
+readf, unit, zdin
+printf, unit1, zdin
+readf, unit, ss
+printf, unit1, ss
+readf, unit, hdsolar
+printf, unit1, hdsolar
+readf, unit, ss
+printf, unit1, ss
+readf, unit, zdsolar
+printf, unit1, zdsolar
+readf, unit, ss
+printf, unit1, ss
+readf, unit, tau2
+printf, unit1, tau2
+readf, unit, ss
+printf, unit1, ss
+readf, unit, hd1
+printf, unit1, hd1
+readf, unit, ss
+printf, unit1, ss
+readf, unit, zd1
+printf, unit1, zd1
+readf, unit, ss
+printf, unit1, ss
+readf, unit, hd1in
+printf, unit1, hd1in
+readf, unit, ss
+printf, unit1, ss
+readf, unit, zd1in
+printf, unit1, zd1in
+readf, unit, ss
+printf, unit1, ss
+readf, unit, hd1solar
+printf, unit1, hd1solar
+readf, unit, ss
+printf, unit1, ss
+readf, unit, zd1solar
+printf, unit1, zd1solar
+readf, unit, ss
+printf, unit1, ss
+readf, unit, pass
+printf, unit1, pass
+readf, unit, ss
+printf, unit1, ss
+readf, unit, zs
+printf, unit1, zs
+readf, unit, ss
+printf, unit1, ss
+readf, unit, hsin
+printf, unit1, hsin
+readf, unit, ss
+printf, unit1, ss
+readf, unit, zsin
+printf, unit1, zsin
+readf, unit, ss
+printf, unit1, ss
+readf, unit, hssolar
+printf, unit1, hssolar
+readf, unit, ss
+printf, unit1, ss
+readf, unit, zssolar
+printf, unit1, zssolar
+readf, unit, ss
+printf, unit1, ss
+readf, unit, rtrun
+printf, unit1, rtrun
+readf, unit, ss
+printf, unit1, ss
+readf, unit, xis0
+printf, unit1, xis0
+readf, unit, ss
+printf, unit1, ss
+readf, unit, xid0
+printf, unit1, xid0
+readf, unit, ss
+printf, unit1, ss
+readf, unit, xid1
+printf, unit1, xid1
+readf, unit, ss
+printf, unit1, ss
+readf, unit, idisk1
+printf, unit1, idisk1
+readf, unit, ss
+printf, unit1, ss
+readf, unit, idisk2
+printf, unit1, idisk2
 
 endif
- if morph eq 'b' then begin
-  filename1 = 'unit_m'+morph+'_'+filter[ii]+'_'+model+'_q'+qyear+$
-                  '_t'+stau+$
-                  '_hd'+shd+'_zd'+szd+'_hd1_'+shd1+'_zd1_'+szd1+$
-                  '_reff'+sreff+'_ell'+sellipt+'_'+'n'+snsersic+'_'+scaabs+'.dat'
-  name1 = rootdir+dir+dir1+filename1
-  openw,unit1,name1,/get_lun
-  print, 'write ', name1
+if morph eq 'b' then begin
+	filename1 = 'unit_m'+morph+'_'+filter[ii]+'_'+model+'_q'+qyear+$
+	'_t'+stau+$
+	'_hd'+shd+'_zd'+szd+'_hd1_'+shd1+'_zd1_'+szd1+$
+	'_reff'+sreff+'_ell'+sellipt+'_'+'n'+snsersic+'_'+scaabs+'.dat'
+	name1 = rootdir+dir+dir1+filename1
+	openw,unit1,name1,/get_lun
+	print, 'write ', name1
 
- ;read the header of the radiation fields files
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, tau1
-  printf, unit1, tau1
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, hd
-  printf, unit1, hd
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, zd
-  printf, unit1, zd
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, hdin
-  printf, unit1, hdin
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, zdin
-  printf, unit1, zdin
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, hdsolar
-  printf, unit1, hdsolar
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, zdsolar
-  printf, unit1, zdsolar
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, tau2
-  printf, unit1, tau2
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, hd1
-  printf, unit1, hd1
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, zd1
-  printf, unit1, zd1
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, hd1in
-  printf, unit1, hd1in
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, zd1in
-  printf, unit1, zd1in
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, hd1solar
-  printf, unit1, hd1solar
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, zd1solar
-  printf, unit1, zd1solar
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, reff
-  printf, unit1, reff
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, ellipt
-  printf, unit1, ellipt
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, nsersic
-  printf, unit1, nsersic
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, xid0
-  printf, unit1, xid0
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, xid1
-  printf, unit1, xid1
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, idisk1
-  printf, unit1, idisk1
-  readf, unit, ss
-  printf, unit1, ss
-  readf, unit, idisk2
-  printf, unit1, idisk2
+;read the header of the radiation fields files
+readf, unit, ss
+printf, unit1, ss
+readf, unit, tau1
+printf, unit1, tau1
+readf, unit, ss
+printf, unit1, ss
+readf, unit, hd
+printf, unit1, hd
+readf, unit, ss
+printf, unit1, ss
+readf, unit, zd
+printf, unit1, zd
+readf, unit, ss
+printf, unit1, ss
+readf, unit, hdin
+printf, unit1, hdin
+readf, unit, ss
+printf, unit1, ss
+readf, unit, zdin
+printf, unit1, zdin
+readf, unit, ss
+printf, unit1, ss
+readf, unit, hdsolar
+printf, unit1, hdsolar
+readf, unit, ss
+printf, unit1, ss
+readf, unit, zdsolar
+printf, unit1, zdsolar
+readf, unit, ss
+printf, unit1, ss
+readf, unit, tau2
+printf, unit1, tau2
+readf, unit, ss
+printf, unit1, ss
+readf, unit, hd1
+printf, unit1, hd1
+readf, unit, ss
+printf, unit1, ss
+readf, unit, zd1
+printf, unit1, zd1
+readf, unit, ss
+printf, unit1, ss
+readf, unit, hd1in
+printf, unit1, hd1in
+readf, unit, ss
+printf, unit1, ss
+readf, unit, zd1in
+printf, unit1, zd1in
+readf, unit, ss
+printf, unit1, ss
+readf, unit, hd1solar
+printf, unit1, hd1solar
+readf, unit, ss
+printf, unit1, ss
+readf, unit, zd1solar
+printf, unit1, zd1solar
+readf, unit, ss
+printf, unit1, ss
+readf, unit, reff
+printf, unit1, reff
+readf, unit, ss
+printf, unit1, ss
+readf, unit, ellipt
+printf, unit1, ellipt
+readf, unit, ss
+printf, unit1, ss
+readf, unit, nsersic
+printf, unit1, nsersic
+readf, unit, ss
+printf, unit1, ss
+readf, unit, xid0
+printf, unit1, xid0
+readf, unit, ss
+printf, unit1, ss
+readf, unit, xid1
+printf, unit1, xid1
+readf, unit, ss
+printf, unit1, ss
+readf, unit, idisk1
+printf, unit1, idisk1
+readf, unit, ss
+printf, unit1, ss
+readf, unit, idisk2
+printf, unit1, idisk2
 endif
 readf, unit, ss
 printf, unit1, ss

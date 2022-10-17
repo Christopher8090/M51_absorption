@@ -1,4 +1,4 @@
-PRO read_scaling, model, qyear, scaabs, tau, nsersic, sfr, sfr4, sfr6, sfr7, old, old3, old5, bd;, ffactor, ffactor4, ffactor6, ffactor7, f_uv, f_uv4, f_uv6, f_uv7, f_BVIK, f_BVIK3, f_BVIK5, f_bd
+PRO read_scaling;, model, qyear, scaabs, tau, nsersic, sfr, sfr4, sfr6, sfr7, old, old3, old5, bd;, ffactor, ffactor4, ffactor6, ffactor7, f_uv, f_uv4, f_uv6, f_uv7, f_BVIK, f_BVIK3, f_BVIK5, f_bd
 
 ; The purpose of this code is to read in the scaling factors defined by "scaling.in" and "ff_scaling.in".
 ; "scaling.in" contains the following information:
@@ -22,12 +22,12 @@ PRO read_scaling, model, qyear, scaabs, tau, nsersic, sfr, sfr4, sfr6, sfr7, old
 ;	- read_scaling, model, qyear, scaabs, tau, nsersic, sfr, sfr4, sfr6, sfr7, old, old3, old5, bd, ffactor, ffactor4, ffactor6, ffactor7, f_uv, f_uv4, f_uv6, f_uv7, f_BVIK, f_BVIK3, f_BVIK5
 ;
 ; Please ensure that this program is included in the directory you wish to use it in.
-;
-common scaling, ffactor, ffactor4, ffactor6, ffactor7, f_uv, f_uv4, f_uv6, f_uv7, f_BVIK, f_BVIK3, f_BVIK5, f_bd,$
+
+common scaling, model, qyear, tau, sfr, sfr4, sfr6, sfr7, old, old3, old5, bd, ffactor, ffactor4, ffactor6, ffactor7, f_uv, f_uv4, f_uv6, f_uv7, f_BVIK, f_BVIK3, f_BVIK5, f_bd, nsersic, scaabs,$
 	rootdir, urad_dir, emission_dir
 
-root = '/net/triangulum/work/cjinman/M51/sedmodel/'	; root directory.
-indata = root+'NUrad_M51a/indata/'	; directory where both "scaling.in" and "ff_scaling.in" are contained.
+root = '/net/triangulum/work/cjinman/M51_absorption/'	; root directory.
+indata = root+'NUrad/indata/'	; directory where both "scaling.in" and "ff_scaling.in" are contained.
 ss=''
 urad_dir=''
 emission_dir=''

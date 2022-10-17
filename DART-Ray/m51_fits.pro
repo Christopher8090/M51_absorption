@@ -4,8 +4,8 @@ compile_opt idl2
 
 read_scaling, model, qyear, scaabs, tau, nsersic, sfr, sfr4, sfr6, sfr7, old, old3, old5, bd, ffactor, ffactor4, ffactor6, ffactor7, f_uv, f_uv4, f_uv6, f_uv7, f_BVIK, f_BVIK3, f_BVIK5, f_bd
 
-root = '/nfs/d58/vlk/sedmodel/cinman/DART-Ray/'
-nudir = root+'../m51a/NUrad_M51a/'
+root = './'
+nudir = root+'../NUrad/'
 numap_dir = nudir+'out/'
 griddir = root+'RUNS/GALAXY_M51a/'	; directory of .h5 files to be read
 outdir = root+'MAPS/M51a/'
@@ -180,13 +180,12 @@ grid_data = H5F_OPEN(grid)
 csize = H5D_READ(H5D_OPEN(grid_data, 'csize'))
 H5F_CLOSE, grid_data
 
-;morph = ['tot','irr1','irr2','irr3','irr4','irr5','irr6']	; different morphologies
 morph = ['tot','irr1','irr2','irr3','irr4','irr5','irr6','irr_HII','irr_HII4','irr_HII6','irr_HII7']
 FOR i = 0, N_ELEMENTS(morph)-1 DO BEGIN
 	map = griddir+'grid_m2dto3d_m51a_'+morph[i]+'_maps_part2_int.h5'
 	IF FILE_TEST(map) EQ 0 THEN BEGIN
 		PRINT, map+' not found! Skipping this component.'
-		GOTO, skip
+		continue
 	ENDIF ELSE PRINT, 'READ: '+map
 	data_map = H5F_OPEN(map)
 
@@ -214,8 +213,6 @@ FOR i = 0, N_ELEMENTS(morph)-1 DO BEGIN
 	FOR k = 0, N_ELEMENTS(wavelength)-1 DO BEGIN
 		map[*,*] = data[*,*,k]
 		outputname = outdir+model+'_map_'+morph[i]+'_'+wavelength[k]+'um_'+scaabs+'.fits'      ;directory and name of output
-;outputname = '../../M51_lmc_abs/maps_dust/map_'+model+'_q'+qyear+'_t'+stau+'_s'+strsfr+'_no'+strold+'_bd'+strbd+'_hd'+shd+'_zd'+szd+'_hd1_'+shd1+'_zd1_'+szd1+'_hs'+shs+'_zs'+szs+'_hs1_'+shs1+'_zs1_'+szs1+'_reff'+sreff+'_ell'+sellipt+'_'+scaabs+'_l'+wavelength[k]+'_'+morph[i]+'.fits'
-;if morph[i] eq 'tot' then outputname = '../../M51_lmc_abs/maps_dust_total/map_'+model+'_q'+qyear+'_t'+stau+'_s'+strsfr+'_no'+strold+'_bd'+strbd+'_hd'+shd+'_zd'+szd+'_hd1_'+shd1+'_zd1_'+szd1+'_hs'+shs+'_zs'+szs+'_hs1_'+shs1+'_zs1_'+szs1+'_reff'+sreff+'_ell'+sellipt+'_'+scaabs+'_l'+wavelength[k]+'_'+morph[i]+'.fits'
 		FXADDPAR, header, 'SIMPLE', 'T'
 		FXADDPAR, header, 'BITPIX', -32
 		FXADDPAR, header, 'NAXIS', SIZE(map, /N_DIMENSIONS) 
@@ -226,7 +223,6 @@ FOR i = 0, N_ELEMENTS(morph)-1 DO BEGIN
 	        writefits, outputname, map, header      ;writes the fits file
 	        PRINT, 'WRITTEN: ' + outputname
 	ENDFOR
-	skip:
 	PRINT, ''
 ENDFOR
 END

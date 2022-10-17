@@ -1,6 +1,6 @@
-pro readwrite_rf_template,filter,ibulge,idisk,idisk3,idisk5,model,qyear,tau,sfr,sfr4,sfr6,sfr7,newold,old3,old5,$
-bd,nsersic,scaabs,factor_bulge,factor_disk,factor_disk1,factor_disk3,factor_disk4,factor_disk5,factor_disk6,$
-factor_disk7,dir1,dir2,swdisk3,swdisk4,swdisk5,swdisk6,swdisk7
+pro readwrite_rf_template,filter,ibulge,idisk,idisk3,idisk5,$
+factor_bulge,factor_disk,factor_disk1,factor_disk3,factor_disk4,factor_disk5,factor_disk6,factor_disk7,$
+dir1,dir2,swdisk3,swdisk4,swdisk5,swdisk6,swdisk7
 
 close,/all
 common param, shd, szd, shd1, szd1, shs, szs, shs1, szs1, sreff, sellipt
@@ -17,7 +17,7 @@ endif
 stau=strcompress(string(round(tau*10)),/remove_all)
 suv=strcompress(string(round(sfr*100)),/remove_all)
 sbd=strcompress(string(round(bd*100)),/remove_all)
-sold=strcompress(string(round(newold*100)),/remove_all)
+sold=strcompress(string(round(old*100)),/remove_all)
 snsersic=strcompress(string(round(nsersic)),/remove_all)
 
 thin_param = '_'+model+'_q'+qyear+'_t'+stau+'_hd'+shd+'_zd'+szd+$
@@ -163,7 +163,7 @@ printf, unit2, tau
 printf, unit2, 'sfr'
 printf, unit2, sfr
 printf, unit2, 'old'
-printf, unit2, newold
+printf, unit2, old
 printf, unit2, 'bd'
 printf, unit2, bd
 ;read the header of the radiation fields files
@@ -476,9 +476,6 @@ for k = 0L, dim_positions-1 do begin
 	rfed(k) = uu
 	energy_abs(k) = ee
 endfor
-savename = urad_dir+'/saves/model/'+model+'_rfed_'+filter+'.save'
-save, rad, height, rfed, energy_abs, filename = savename
-;print, 'saved: '+savename
 free_lun, unit10
 free_lun, unit0
 free_lun, unit1

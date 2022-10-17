@@ -1,7 +1,7 @@
 ;this program produces a file of infrared emissivity as a function of
 ;R,z corresponding to the dust emission from the HII regions
 
-pro local_emissivity_flat,model,qyear,tau,sfr,sfr4,sfr6,sfr7,old,bd,scaabs
+pro local_emissivity_flat
 
 start_time = systime(/seconds)
 common scaling

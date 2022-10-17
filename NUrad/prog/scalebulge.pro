@@ -1,5 +1,5 @@
 pro scalebulge,model,qyear,tau,scaabs,nsersic,bulge_disk
-
+compile_opt idl2
 ; subroutine of 'maps.pro'
 
 ; The purpose of this code is correctly scale the bulge according to only the stellar emission (tau = 0), this is what the raw maps output from urad are. This code opens these raw output maps for each component present and sums up the total of each.
@@ -9,7 +9,7 @@ dir=root+'out/'
 
 ss=''
 name = root+'indata/geometry.in'
-openr,unit,name,/get_lun
+openr, unit, name, /get_lun
 readf, unit, ss
 readf, unit, tau1
 readf, unit, ss
@@ -201,67 +201,63 @@ dim = n_elements(filter)
 bulge_disk = DBLARR(dim)
 
 for ii = 0, dim-1L do begin
-	fname_b=dir+'map_mb_'+filter(ii)+'_'+model+'_q'+qyear+'_i'+sinclination+'_t'+stau+'_n'+snsersic+'_'+scaabs+'.dat'
-	fname_d=dir+'map_md_'+filter(ii)+'_'+model+'_q'+qyear+'_i'+sinclination+'_t'+stau+'_'+scaabs+'.dat'
-	fname_di=dir+'map_mdi_'+filter(ii)+'_'+model+'_q'+qyear+'_i'+sinclination+'_t'+stau+'_'+scaabs+'.dat'
-	fname_do=dir+'map_mdo_'+filter(ii)+'_'+model+'_q'+qyear+'_i'+sinclination+'_t'+stau+'_'+scaabs+'.dat'
-	fname_td=dir+'map_mtd_'+filter(ii)+'_'+model+'_q'+qyear+'_i'+sinclination+'_t'+stau+'_'+scaabs+'.dat'
-	fname_tdi=dir+'map_mtdi_'+filter(ii)+'_'+model+'_q'+qyear+'_i'+sinclination+'_t'+stau+'_'+scaabs+'.dat'
-	fname_tdo=dir+'map_mtdo_'+filter(ii)+'_'+model+'_q'+qyear+'_i'+sinclination+'_t'+stau+'_'+scaabs+'.dat'
+	fname_b=dir+'map_mb_'+filter[ii]+'_'+model+'_q'+qyear+'_i'+sinclination+'_t'+stau+'_n'+snsersic+'_'+scaabs+'.dat'
+	fname_d=dir+'map_md_'+filter[ii]+'_'+model+'_q'+qyear+'_i'+sinclination+'_t'+stau+'_'+scaabs+'.dat'
+	fname_di=dir+'map_mdi_'+filter[ii]+'_'+model+'_q'+qyear+'_i'+sinclination+'_t'+stau+'_'+scaabs+'.dat'
+	fname_do=dir+'map_mdo_'+filter[ii]+'_'+model+'_q'+qyear+'_i'+sinclination+'_t'+stau+'_'+scaabs+'.dat'
+	fname_td=dir+'map_mtd_'+filter[ii]+'_'+model+'_q'+qyear+'_i'+sinclination+'_t'+stau+'_'+scaabs+'.dat'
+	fname_tdi=dir+'map_mtdi_'+filter[ii]+'_'+model+'_q'+qyear+'_i'+sinclination+'_t'+stau+'_'+scaabs+'.dat'
+	fname_tdo=dir+'map_mtdo_'+filter[ii]+'_'+model+'_q'+qyear+'_i'+sinclination+'_t'+stau+'_'+scaabs+'.dat'
 	
-	openr,unit1,fname_b,/get_lun
-	openr,unit2,fname_d,/get_lun
-	openr,unit3,fname_di,/get_lun
-	openr,unit4,fname_do,/get_lun
-	openr,unit5,fname_td,/get_lun
-	openr,unit6,fname_tdi,/get_lun
-	openr,unit7,fname_tdo,/get_lun
+	openr, unit1, fname_b, /get_lun
+	openr, unit2, fname_d, /get_lun
+	openr, unit3, fname_di, /get_lun
+	openr, unit4, fname_do, /get_lun
+	openr, unit5, fname_td, /get_lun
+	openr, unit6, fname_tdi, /get_lun
+	openr, unit7, fname_tdo, /get_lun
 	
-	zb=dblarr(nx_b,ny_b)
+	zb = dblarr(nx_b,ny_b)
 	zbx = dblarr(ny_b)
 	for i = 0, nx_b-1L do begin
-	    readf,unit1,zbx
-	    zb(i,*) = zbx(*)
+		readf,unit1,zbx
+		zb[i,*] = zbx[*]
 	endfor
 	free_lun,unit1
-	print, total(zb)
 	
-	zd=dblarr(nx_m,ny_m)
-	zdi=dblarr(nx_i,ny_i)
-	zdo=dblarr(nx_o,ny_o)
-	ztd=dblarr(nx_m,ny_m)
-	ztdi=dblarr(nx_i,ny_i)
-	ztdo=dblarr(nx_o,ny_o)
+	zd = dblarr(nx_m,ny_m)
+	zdi = dblarr(nx_i,ny_i)
+	zdo = dblarr(nx_o,ny_o)
+	ztd = dblarr(nx_m,ny_m)
+	ztdi = dblarr(nx_i,ny_i)
+	ztdo = dblarr(nx_o,ny_o)
 	
 	FOR i = 0, nx_m-1L DO BEGIN
-		readf,unit2,zdx
-                zd(i,*) = zdx(*)
-		readf,unit5,ztdx
-                ztd(i,*) = ztdx(*)
+		readf, unit2, zdx
+		zd[i,*] = zdx[*]
+		readf, unit5, ztdx
+		ztd[i,*] = ztdx[*]
 	ENDFOR
 	FOR i = 0, nx_i-1L DO BEGIN
-                readf,unit3,zdix
-                zdi(i,*) = zdix(*)
-                readf,unit6,ztdix
-                ztdi(i,*) = ztdix(*)
+		readf, unit3, zdix
+		zdi[i,*] = zdix[*]
+		readf, unit6, ztdix
+		ztdi[i,*] = ztdix[*]
         ENDFOR
 	FOR i = 0, nx_o-1L DO BEGIN
-                readf,unit4,zdox
-                zdo(i,*) = zdox(*)
-                readf,unit7,ztdox
-                ztdo(i,*) = ztdox(*)
+		readf, unit4, zdox
+		zdo[i,*] = zdox[*]
+		readf, unit7, ztdox
+		ztdo[i,*] = ztdox[*]
         ENDFOR
 	
-	free_lun,unit2
-	free_lun,unit3
-	free_lun,unit4
-	free_lun,unit5
-	free_lun,unit6
-	free_lun,unit7
-	;
-	bulge_disk(ii)=total(zb)/(total(zd)+total(ztd)+total(zdi)+total(ztdi)+total(zdo)+total(ztdo))
-	print, bulge_disk
-;
-endfor ;
-
+	free_lun, unit2
+	free_lun, unit3
+	free_lun, unit4
+	free_lun, unit5
+	free_lun, unit6
+	free_lun, unit7
+	
+	bulge_disk[ii] = total(zb) / (total(zd)+total(ztd)+total(zdi)+total(ztdi)+total(zdo)+total(ztdo))
+endfor
 end

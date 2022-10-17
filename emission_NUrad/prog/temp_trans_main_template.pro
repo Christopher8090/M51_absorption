@@ -2,9 +2,7 @@
 ;composition placed in the radiation fields that are inputed to this routine
 ;it uses RF having a different spectral shape for old
  
-pro temp_trans_main_template,model,qyear,tau,sfr,old,bd,scaabs,check 
-;temp_trans_main_template,'wd01','06',6.6,1.0,0.8,0.49,'abs','no' ;call for MW
-;do not confuse the keyword "qyear" with "qcomp_year"!!
+pro temp_trans_main_template,check 
 
 ;input:
 ; model - dust model, e.g. 'wd01'
@@ -40,7 +38,6 @@ suv=strcompress(string(round(sfr*100)),/remove_all)
 sbd=strcompress(string(round(bd*100)),/remove_all)
 sold=strcompress(string(round(old*100)),/remove_all)
 stau=strcompress(string(round(tau*10)),/remove_all)
-;stau='86096'
 
 ;read file with the geometry of the system
 ss = ''
@@ -168,12 +165,12 @@ sreff=strcompress(string(round(reff*1000.)),/remove_all)
 sellipt=strcompress(string(round(ellipt*100.)),/remove_all)
 
 ;read the file with the dust model parameters and grain size distribution
-if model eq 'wd01' then namer1=rootdir+dir+'grain_sizeswd01_q'+qyear+'.dat'
-if model eq 'lmc1' then namer1=rootdir+dir+'grain_sizeslmc1_q'+qyear+'.dat'
-if model eq 'wd01_c60' then namer1=rootdir+dir+'grain_sizeswd01_q'+qyear+'.dat'
-if model eq 'wd01_c50' then namer1=rootdir+dir+'grain_sizeswd01_q'+qyear+'.dat'
-if model eq 'wd01_c40' then namer1=rootdir+dir+'grain_sizeswd01_q'+qyear+'.dat'
-if model eq 'wd01_c30' then namer1=rootdir+dir+'grain_sizeswd01_q'+qyear+'.dat'
+if model eq 'wd01' then namer1 = dir+'grain_sizeswd01_q'+qyear+'.dat'
+if model eq 'lmc1' then namer1 = dir+'grain_sizeslmc1_q'+qyear+'.dat'
+if model eq 'wd01_c60' then namer1 = dir+'grain_sizeswd01_q'+qyear+'.dat'
+if model eq 'wd01_c50' then namer1 = dir+'grain_sizeswd01_q'+qyear+'.dat'
+if model eq 'wd01_c40' then namer1 = dir+'grain_sizeswd01_q'+qyear+'.dat'
+if model eq 'wd01_c30' then namer1 = dir+'grain_sizeswd01_q'+qyear+'.dat'
 openr,unit11,namer1,/get_lun
 
 ss = ' '
@@ -298,19 +295,19 @@ for j = 0L, dim_comp-1 do begin	; begin loop in composition
 	readf, unit0, newbd
 	;check that the input parameters read from the file are the same as those
 	;inputed to the program (since we have a multiple definition of parameters)
-	if newtau ne tau then begin
+	if abs(double(newtau)-tau) ge 0.001 then begin
 		print, 'unexpected tau; program stops'
 		goto, mark1
 	endif
-	if newsfr ne sfr then begin
+	if abs(double(newsfr)-sfr) ge 0.001 then begin
 		print, 'unexpected sfr; program stops'
 		goto, mark1
 	endif
-	if newbd ne bd then begin
+	if abs(double(newbd)-bd) ge 0.001 then begin
 		print, 'unexpected bd; program stops'
 		goto, mark1
 	endif
-	if newold ne old then begin
+	if abs(double(newold)-old) ge 0.001 then begin
 		print, 'unexpected old; program stops'
 		goto, mark1
 	endif

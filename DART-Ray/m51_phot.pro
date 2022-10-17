@@ -6,13 +6,13 @@ compile_opt idl2
 ; with the appropriate PSF. Then carries out the azimuthally averaged photometry and combines the profiles with the stellar
 ; emission for the NIR wavelengths. A chi^2 value is calculated then all relevant data is saved.
 
-root = '/nfs/d58/vlk/sedmodel/cinman/'
-nurad_dir = root+'m51a/NUrad_M51a/'
+root = '../'
+nurad_dir = root+'NUrad/'
 mapdir = root+'DART-Ray/MAPS/M51a/'	; directory containing surface brightness profiles.
 griddir = root+'DART-Ray/RUNS/GALAXY_M51a/'
-savedir = nurad_dir+'saves/model/'	; directory for the .save files containing the SB profiles.
+savedir = root+'saves/model/'	; directory for the .save files containing the SB profiles.
 kernel_dir = nurad_dir+'maps/obs/kernels/'
-figdir = nurad_dir+'figures/model/'
+figdir = root+'figures/'
 print_text = 0	; =1 for text to be printed to terminal.
 
 read_scaling, model, qyear, scaabs, tau, nsersic, sfr, sfr4, sfr6, sfr7, old, old3, old5, bd, ffactor, ffactor4, ffactor6, ffactor7, f_uv, f_uv4, f_uv6, f_uv7, f_BVIK, f_BVIK3, f_BVIK5, f_bd
@@ -40,28 +40,18 @@ wavelength[8]  = '250'	;dust
 wavelength[9]  = '350'	;dust
 wavelength[10] = '500'	;dust
 
-;read, combined, prompt='Combine wd01 and lmc1 dust models? [1]=yes:'
-combined = 0
-if combined eq 1 then model = "combined"
-read, convolve_model, prompt="Convolve? [1]=yes, [0]=no: "
+;read, convolve_model, prompt="Convolve? [1]=yes, [0]=no: "
+convolve_model = 0
 FOR i = 0, 10 DO BEGIN
 IF wavelength[i] EQ '100' THEN CONTINUE	; skips 100um maps as there is no data at this wavelength.
 morph = ['tot','irr1','irr2','irr3','irr4','irr5','irr6','irr_HII','irr_HII4','irr_HII6','irr_HII7']
 map = STRARR(N_ELEMENTS(morph))	; defines an array to fit all morphological components
 morph_check = LONARR(N_ELEMENTS(morph))	; checks if maps for a given morphology is present
 FOR k = 0, N_ELEMENTS(morph)-1 DO BEGIN
-	if combined eq 0 then begin
-		map[k] = mapdir+model+'_map_'+morph[k]+'_'+wavelength[i]+'um_'+scaabs+'.fits'
-		morph_check[k] = file_test(map[k])	; checks if maps for a given morphology is present
-	endif else begin
-		if morph[k] eq "irr3" or morph[k] eq "irr4" then begin
-			map[k] = mapdir+'lmc1_map_'+morph[k]+'_'+wavelength[i]+'um_'+scaabs+'.fits'
-		endif else begin
-			map[k] = mapdir+'wd01_map_'+morph[k]+'_'+wavelength[i]+'um_'+scaabs+'.fits'
-		endelse
-		morph_check[k] = file_test(map[k])	; checks if maps for a given morphology is present
-	endelse
+	map[k] = mapdir+model+'_map_'+morph[k]+'_'+wavelength[i]+'um_'+scaabs+'.fits'
+	morph_check[k] = file_test(map[k])	; checks if maps for a given morphology is present
 ENDFOR
+
 irr1_data = READFITS(map[WHERE(morph EQ 'irr1')],hd)
 irr2_data = READFITS(map[WHERE(morph EQ 'irr2')],hd)
 irr3_data = READFITS(map[WHERE(morph EQ 'irr3')],hd)
@@ -72,9 +62,7 @@ IF morph_check[7] EQ 1 THEN HII_data  = READFITS(map[WHERE(morph EQ 'irr_HII')],
 IF morph_check[8] EQ 1 THEN HII4_data = READFITS(map[WHERE(morph EQ 'irr_HII4')],hd) ELSE HII4_data = 0
 IF morph_check[9] EQ 1 THEN HII6_data = READFITS(map[WHERE(morph EQ 'irr_HII6')],hd) ELSE HII6_data = 0
 IF morph_check[10] EQ 1 THEN HII7_data = READFITS(map[WHERE(morph EQ 'irr_HII7')],hd) ELSE HII7_data = 0
-if combined eq 1 then begin
-        tot_data = irr1_data + irr2_data + irr3_data + irr4_data + irr5_data + irr6_data + HII_data + HII4_data
-endif else tot_data  = READFITS(map[WHERE(morph EQ 'tot')],hd)
+tot_data  = READFITS(map[WHERE(morph EQ 'tot')],hd)
 PRINT, 'READ: '+model+' '+wavelength[i]+'um maps'
 PRINT, 'Components found: ', morph[WHERE(morph_check EQ 1)]
 PRINT, ''
@@ -344,15 +332,15 @@ av_int_rad_HII7[0] = !VALUES.F_NaN
 ;------------------------------------------ COMBINE NIR PROFILES -----------------------------------------------------
 combine = 0	; MUST BE KEPT AT 0!! If the necessary file is found, this is automatically set to 1!
 IF wavelength[i] EQ '3.6' THEN BEGIN
-	model_data = nurad_dir+"saves/model/"+model+"_datafile_ir36_"+scaabs+".save"
+	model_data = root+"saves/model/"+model+"_datafile_ir36_"+scaabs+".save"
 	combine = 1
 ENDIF
 IF wavelength[i] EQ '4.5' THEN BEGIN
-	model_data = nurad_dir+"saves/model/"+model+"_datafile_ir45_"+scaabs+".save"
+	model_data = root+"saves/model/"+model+"_datafile_ir45_"+scaabs+".save"
 	combine = 1
 ENDIF
 IF wavelength[i] EQ '5.8' THEN BEGIN
-	model_data = nurad_dir+"saves/model/"+model+"_datafile_ir58_"+scaabs+".save"
+	model_data = root+"saves/model/"+model+"_datafile_ir58_"+scaabs+".save"
 	combine = 1
 ENDIF
 IF combine NE 1 THEN GOTO, skip_combine
@@ -378,7 +366,7 @@ IF wavelength[i] EQ '160' THEN wave_obs = '160.000'
 IF wavelength[i] EQ '250' THEN wave_obs = '250.000'
 IF wavelength[i] EQ '350' THEN wave_obs = '350.000'
 IF wavelength[i] EQ '500' THEN wave_obs = '500.000'
-obs_data = nurad_dir+'saves/obs/datafile_'+wave_obs+'um.save'
+obs_data = root+'saves/obs/datafile_'+wave_obs+'um.save'
 RESTORE, obs_data	;profiles from observation data
 ;---------------------------------- CHI-SQUARED TEST -------------------------------------
 nsteps_obs = n_elements(x_rad)
@@ -445,16 +433,23 @@ cgplot, x_rad_model, av_int_rad_HII,  linestyle=1, color='cyan', /overplot
 cgplot, x_rad_model, av_int_rad_HII4, linestyle=1, color='cyan', /overplot
 cgplot, x_rad_model, av_int_rad_tot,  linestyle=0, color='red', /overplot
 
-cgLegend, colors=['black','red','green','orange','blue','green','orange','blue','cyan'], $
+if wavelength[i] eq 3.6 or wavelength[i] eq 4.5 or wavelength[i] eq 5.8 then begin
+	cgLegend, colors=['black','red','green','orange','blue','green','orange','blue','cyan'], $
         linestyle=[0,0,2,2,2,1,1,1,1], $
-        title=['obs','model','inner thin','main thin','outer thin','inner thick','main thick','outer thick','HII'], $
+        title=['obs','model','inner thin','main thin','outer thin','inner thick','main thick','outer thick','HII'],$
         length=0.03, location=[0.75,0.9], vspace=4
+endif else begin
+	cgLegend, colors=['black','red','grey','grey','cyan'],$
+	linestyle=[0,0,1,2,1], $
+	title=['obs','model','Thick dust','Thin dust','HII'],$
+	length=0.03, location=[0.75,0.9], vspace=4
+endelse
 
 cgplot, [xmin,xmax], [20,20], color="blue", linestyle=2, position=[0.17,0.1,0.95,0.25], $
         ytitle="R [%]", xrange=[xmin,xmax], xtitle='Radius, [kpc]', /NoErase, yrange=[-50,50], yticks=1
 cgplot, [xmin,xmax], [-20,-20], color="blue", linestyle=2, /overplot
 cgplot, [xmin,xmax], [0,0], color="black", /overplot
-cgplot, x_rad_model, resi, color='red', /overplot
+cgplot, x_rad, resi, color='red', /overplot
 
 device, /close_file
 cgfixps, plotname
