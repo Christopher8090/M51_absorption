@@ -28,7 +28,7 @@ pro kappagrain_H, model, qyear, kappatf, filters, kappatf_ab, kappatf_sc,$
 
 common dirdef,rootdir
 
-rootdir = '/nfs/d58/vlk/sedmodel/'
+rootdir = '../../'
 mydir = rootdir+'cinman/clump/'
 
 ;Initialise dummy variables

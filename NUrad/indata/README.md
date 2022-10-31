@@ -20,9 +20,9 @@ The parameters for the disk components (stellar, thin stellar, dust and thin dus
 - hstin/hdtin: The inner truncation radius of the disk (hstin for stellar disks, hdtin for dust disks).
 - rtruncate/rtruncated: The outer truncation radious of the disk (rtruncate for stellar disks, rtruncated for dust disks).
 - hssolar/hdsolar: Radius at which the scale-height of the disk can be flared.
-- zs/zd: Scale-height of the disk.
-- zsin/zdin: Scale-height of the dist at R_e.
-- zssolar/zdsolar: Scale-height of the disk at hssolar/hdsolar.
+- zs/zd: Scale-height of the disk (does not require changing). 
+- zsin/zdin: Scale-height of the dist at R_e (does not require changing).
+- zssolar/zdsolar: Scale-height of the disk at hssolar/hdsolar (does not require changing).
 - sharp/sharpd: Smoothing factor at rtruncate/rtruncated.
 - xis/xid: Parameter describing the linear slope from R=0 to hstin/hdtin.
 - idisk: Boolean flag to include the component.

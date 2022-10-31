@@ -12,7 +12,7 @@ set check="'no'"
 set dr_req=100.
 set dz_req=25.
 
-cd /net/triangulum/work/cjinman/M51_absorption/emission_NUrad/prog
+cd ../../emission_NUrad/prog
 /applications/idl/current/idl/bin/idl <<eof
 read_scaling
 @init

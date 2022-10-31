@@ -6,7 +6,7 @@ compile_opt idl2
 
 ;-------------------------------------- DEFINE DIRECTORIES ------------------------------
 print_text = 0  ; to print information about each step, set to 1.
-root = '/net/triangulum/work/cjinman/M51/sedmodel/'
+root = '../../'
 emiss_indata = root+'emission_NUrad_M51a/outdata_intlum/'
 nurad_indata = root+'NUrad_M51a/indata/'
 save_dir = root+'NUrad_M51a/saves/model/'

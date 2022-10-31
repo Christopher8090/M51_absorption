@@ -26,7 +26,7 @@ PRO read_scaling;, model, qyear, scaabs, tau, nsersic, sfr, sfr4, sfr6, sfr7, ol
 common scaling, model, qyear, tau, sfr, sfr4, sfr6, sfr7, old, old3, old5, bd, ffactor, ffactor4, ffactor6, ffactor7, f_uv, f_uv4, f_uv6, f_uv7, f_BVIK, f_BVIK3, f_BVIK5, f_bd, nsersic, scaabs,$
 	rootdir, urad_dir, emission_dir
 
-root = '/net/triangulum/work/cjinman/M51_absorption/'	; root directory.
+root = '../../'	; root directory.
 indata = root+'NUrad/indata/'	; directory where both "scaling.in" and "ff_scaling.in" are contained.
 ss=''
 urad_dir=''

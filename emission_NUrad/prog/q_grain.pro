@@ -4,7 +4,7 @@
 pro q_grain,comp,qcomp_year,lambda,Q_abs,Q_sc,Q_ph
 
 ;common dirdef,rootdir
-rootdir='/net/triangulum/work/cjinman/clumps/sedmodel_progs/'
+rootdir='../../'
 Staub_dir=rootdir+'/Draine/'
 name = Staub_dir+comp+qcomp_year
 openr,unit,name,/get_lun

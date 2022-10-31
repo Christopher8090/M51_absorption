@@ -1,4 +1,4 @@
-PRO read_scaling, model, qyear, scaabs, tau, nsersic, sfr, sfr4, sfr6, sfr7, old, old3, old5, bd, ffactor, ffactor4, ffactor6, ffactor7, f_uv, f_uv4, f_uv6, f_uv7, f_BVIK, f_BVIK3, f_BVIK5, f_bd, qclump_ratio1, qclump_ratio3, qclump_ratio5, mwuv
+PRO read_scaling, model, qyear, scaabs, tau, nsersic, sfr, sfr4, sfr6, sfr7, old, old3, old5, bd, ffactor, ffactor4, ffactor6, ffactor7, f_uv, f_uv4, f_uv6, f_uv7, f_BVIK, f_BVIK3, f_BVIK5, f_bd
 
 ; The purpose of this code is to read in the scaling factors defined by "scaling.in" and "ff_scaling.in".
 ; "scaling.in" contains the following information:
@@ -23,7 +23,7 @@ PRO read_scaling, model, qyear, scaabs, tau, nsersic, sfr, sfr4, sfr6, sfr7, old
 ;
 ; Please ensure that this program is included in the directory you wish to use it in.
 ;
-root = '/net/triangulum/work/cjinman/M51_absorption/'	; root directory.
+root = '../../'	; root directory.
 indata = root+'NUrad/indata/'	; directory where both "scaling.in" and "ff_scaling.in" are contained.
 
 filename = indata+'scaling.in'
