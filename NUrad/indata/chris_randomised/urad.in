@@ -1,0 +1,128 @@
+2
+3
+44
+0.0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.7
+1.0
+1.4
+1.6
+1.8
+1.9
+2.0
+2.1
+2.2
+2.4
+2.6
+2.9
+3.3
+3.7
+4.0
+4.3
+4.7
+4.9
+5.2
+5.5
+6.0
+6.3
+6.6
+6.9
+7.1
+7.3
+7.5
+8.0
+9.0
+10.0
+11.0
+12.0
+13.0
+14.0
+15.0
+16.0
+17.0
+25.0
+12
+0.0
+0.05
+0.1
+0.15
+0.2
+0.3
+0.4
+0.6
+0.8
+1.0
+1.5
+2.0
+
+iurad = 0 to not do any energy density calculations
+      = 1 to do energy density calculations on a regular grid
+          sampled equally in R and Z
+      = 2 to do energy density calculations on an irregular grid
+          in R and Z
+
+for iurad = 1:
+ures = resolution of grid for energy density in kpc
+icang = identifier for distribution of angles 
+        (must be 1, 2 or 3 to give 26, 98 or 218 directions respectively) 
+rsizeu = maximum distance in r from centre for calculation in kpc
+zsizeu = maximum distance in z from centre for calculation in kpc
+
+eg:
+
+1
+0.5
+3
+20.0
+2.5
+
+
+for iurad = 2:
+icang = identifier for distribution of angles 
+        (must be 1, 2 or 3 to give 26, 98 or 218 directions respectively) 
+nru = number of points to sample in R
+ru_1 positions of points to sample in R in kpc
+ru_2
+.
+.
+.
+ru_nru
+nzu =  number of points to sample in Z
+zu_1 positions of points to sample in Z in kpc
+zu_2
+.
+.
+.
+zu_nru
+
+
+eg:
+
+2
+3
+13
+0.0
+0.5
+1.0
+1.5
+2.0
+4.0
+6.0
+8.0
+10.0
+12.0
+16.0
+20.0
+24.0
+7
+0.0
+0.1
+0.2
+0.5
+1.0
+1.5
+2.0
