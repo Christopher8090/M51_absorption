@@ -1,1 +1,7 @@
 .ipynb_checkpoints
+NUrad/out/profiles/*.*
+NUrad/out/*.fits
+NUrad/out/*.dat
+*.DS_Store
+NUrad/prog/NUrad
+figures/*.ps
