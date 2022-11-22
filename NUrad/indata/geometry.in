@@ -154,11 +154,11 @@ hs3solar
 zs3solar
 0.19
 hs4
-0.55
+0.67
 zs4
 0.09
 hs4in
-0.3
+0.45
 zs4in
 0.09
 hs4solar
@@ -178,7 +178,7 @@ rtruncate4
 sharp4
 0.01
 rtruncated4
-1.7
+2.1
 sharpd4
 0.01
 xis3
@@ -302,7 +302,7 @@ hs3tin
 hd3tin
 0.
 hs4tin
-0.
+0.15
 hd4tin
 0.
 hs5tin
