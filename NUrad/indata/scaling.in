@@ -3,10 +3,10 @@ wd01	-1
 abs	-1
 tau	17.7
 nsersic	4
-sfr	1.
-sfr4	3.8.
-sfr6	1.
-sfr7	0.
+sfr	5.1
+sfr4	6
+sfr6	1.4
+sfr7	0.8
 old	1.
 old3	1.
 old5	1.

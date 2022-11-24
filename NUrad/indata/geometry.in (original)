@@ -45,7 +45,7 @@ h_ir58disk
 zs
 0.19
 hsin
-5.5
+6
 zsin
 0.19
 hssolar
@@ -53,11 +53,11 @@ hssolar
 zssolar
 0.19
 hs1
-4
+4.
 zs1
 0.09
 hs1in
-2.2
+2.
 zs1in
 0.09
 hs1solar
@@ -73,7 +73,7 @@ rtruncated
 sharpd
 0.03
 rtruncate1
-7
+6.8
 sharp1
 0.03
 rtruncated1
@@ -89,7 +89,7 @@ nsersic
 xis0
 -2.
 xis1
-0.8
+-0.7
 xid0
 1.
 xid1
@@ -154,7 +154,7 @@ hs3solar
 zs3solar
 0.19
 hs4
-1.4
+0.67
 zs4
 0.09
 hs4in
@@ -174,7 +174,7 @@ rtruncated3
 sharpd3
 0.01
 rtruncate4
-2.1
+1.7
 sharp4
 0.01
 rtruncated4
@@ -184,7 +184,7 @@ sharpd4
 xis3
 0.
 xis4
-0.45
+0.25
 xid3
 0.65
 xid4
@@ -249,11 +249,11 @@ hs5solar
 zs5solar
 0.19
 hs6
-1.3
+4.
 zs6
 0.09
 hs6in
-7.0
+7.5
 zs6in
 0.09
 hs6solar
@@ -269,7 +269,7 @@ rtruncated5
 sharpd5
 0.01
 rtruncate6
-20
+15.
 sharp6
 0.01
 rtruncated6
@@ -279,7 +279,7 @@ sharpd6
 xis5
 -5.
 xis6
-0.
+2.
 xid5
 -1.
 xid6
@@ -294,7 +294,7 @@ hstin
 hdtin
 1.3
 hs1tin
-2.1
+1.3
 hd1tin
 1.3
 hs3tin
@@ -310,7 +310,7 @@ hs5tin
 hd5tin
 6.5
 hs6tin
-6.5
+6.4
 hd6tin
 6.4
 nuclear_component
