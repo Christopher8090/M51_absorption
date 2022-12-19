@@ -5,3 +5,7 @@ NUrad/out/*.dat
 *.DS_Store
 NUrad/prog/NUrad
 figures/*.ps
+NUrad/indata/.sync
+NUrad/indata/Icon
+NUrad/indata/Icon
+NUrad/indata/Icon

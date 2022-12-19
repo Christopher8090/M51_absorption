@@ -53,11 +53,11 @@ hssolar
 zssolar
 0.19
 hs1
-4
+4.5
 zs1
 0.09
 hs1in
-2.2
+2.0
 zs1in
 0.09
 hs1solar
@@ -73,7 +73,7 @@ rtruncated
 sharpd
 0.03
 rtruncate1
-7
+7.2
 sharp1
 0.03
 rtruncated1
@@ -146,7 +146,7 @@ h_ir58disk3
 zs3
 0.19
 hs3in
-0.
+0.2
 zs3in
 0.19
 hs3solar
@@ -174,7 +174,7 @@ rtruncated3
 sharpd3
 0.01
 rtruncate4
-2.1
+2.2
 sharp4
 0.01
 rtruncated4
@@ -223,7 +223,7 @@ hd6solar
 zd6solar
 0.09
 h_bdisk5
-1.
+2
 h_vdisk5
 1.
 h_idisk5
@@ -249,7 +249,7 @@ hs5solar
 zs5solar
 0.19
 hs6
-1.3
+1.4
 zs6
 0.09
 hs6in
@@ -294,7 +294,7 @@ hstin
 hdtin
 1.3
 hs1tin
-2.1
+1.9
 hd1tin
 1.3
 hs3tin
@@ -315,11 +315,11 @@ hd6tin
 6.4
 nuclear_component
 hs7
-1.
+2.
 zs7
 0.09
 hs7in
-2.5
+0.1
 zs7in
 0.09
 hs7solar
@@ -327,7 +327,7 @@ hs7solar
 zs7solar
 0.09
 rtruncate7
-4.
+1.
 sharp7
 0.01
 xis7
@@ -335,4 +335,4 @@ xis7
 idisk7
 1
 hs7tin
-2.
+0.
