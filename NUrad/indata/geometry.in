@@ -19,7 +19,7 @@ hd1
 zd1
 0.09
 hd1in
-2.5
+2.1
 zd1in
 0.09
 hd1solar
@@ -27,7 +27,7 @@ hd1solar
 zd1solar
 0.09
 h_bdisk
-2.
+4.4
 h_vdisk
 3.
 h_idisk
@@ -57,7 +57,7 @@ hs1
 zs1
 0.09
 hs1in
-2.5
+2.1
 zs1in
 0.09
 hs1solar
@@ -65,15 +65,15 @@ hs1solar
 zs1solar
 0.09
 rtruncate
-7.4
+6.6
 sharp
 0.03
 rtruncated
-7.0
+6.6
 sharpd
 0.03
 rtruncate1
-7.0
+6.6
 sharp1
 0.03
 rtruncated1
@@ -87,7 +87,7 @@ ellipt
 nsersic
 4
 xis0
--2.
+1
 xis1
 0
 xid0
@@ -128,7 +128,7 @@ hd4solar
 zd4solar
 0.09
 h_bdisk3
-3.
+0.85
 h_vdisk3
 2.
 h_idisk3
@@ -166,11 +166,11 @@ hs4solar
 zs4solar
 0.09
 rtruncate3
-2.0
+2.1
 sharp3
 0.01
 rtruncated3
-2.0
+2.1
 sharpd3
 0.01
 rtruncate4
@@ -203,7 +203,7 @@ hd5
 zd5
 0.16
 hd5in
-7.1
+6.7
 zd5in
 0.16
 hd5solar
@@ -223,7 +223,7 @@ hd6solar
 zd6solar
 0.09
 h_bdisk5
-2
+1.8
 h_vdisk5
 1.
 h_idisk5
@@ -241,7 +241,7 @@ h_ir58disk5
 zs5
 0.19
 hs5in
-6.9
+6.7
 zs5in
 0.19
 hs5solar
@@ -290,9 +290,9 @@ idisk6
 1
 inner_trunc_rad
 hstin
-2.0
+1.9
 hdtin
-2.0
+1.9
 hs1tin
 1.9
 hd1tin
@@ -308,7 +308,7 @@ hd4tin
 hs5tin
 6.4
 hd5tin
-6.5
+6.4
 hs6tin
 6.9
 hd6tin

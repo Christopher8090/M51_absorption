@@ -7,10 +7,10 @@ sfr	6.2
 sfr4	6.0
 sfr6	1.0
 sfr7	6
-old	1.
-old3	1.
-old5	1.
-bd	.007
+old	2.4
+old3	1.25
+old5	1.1
+bd	.025
 ffactor	0.1
 ffactor4	1.
 ffactor6	0
