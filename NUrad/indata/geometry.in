@@ -211,7 +211,7 @@ hd5solar
 zd5solar
 0.16
 hd6
-4.
+1.5
 zd6
 0.09
 hd6in
@@ -223,7 +223,7 @@ hd6solar
 zd6solar
 0.09
 h_bdisk5
-4.0
+2.0
 h_vdisk5
 1.
 h_idisk5
@@ -249,11 +249,11 @@ hs5solar
 zs5solar
 0.19
 hs6
-1.4
+1.5
 zs6
 0.09
 hs6in
-7.0
+6.8
 zs6in
 0.09
 hs6solar
@@ -279,7 +279,7 @@ sharpd6
 xis5
 -5.
 xis6
-0.
+8
 xid5
 -1.
 xid6
