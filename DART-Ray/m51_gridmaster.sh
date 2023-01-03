@@ -1,8 +1,9 @@
 #!/bin/tcsh
 setenv OMP_NUM_THREADS 2
 
-echo -n "Please enter model (i.e., 'wd01_abs'): "
-set model=$<
+#echo -n "Please enter model (i.e., 'wd01_abs'): "
+#set model=$<
+set model="wd01_abs"
 echo "$model"
 
 if ( -f "./2DTO3D_GRIDS/$model/input_grid_2dto3d_m51_irr1.in") then

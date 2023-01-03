@@ -4,10 +4,10 @@ PRO diag_emissivity
 ; Produces radial profiles at a height z=0 for the wavelengths specified in the `wavelength` array.
 
 ;------------------------------------------------ DEFINE DIRECTORIES -------------------------------------------
-root = '/net/triangulum/work/cjinman/M51_absorption/'
+root = '../../'
 em_dir = root+'emission_NUrad/outdata_intlum/'
-out_dir = root+'NUrad/figures/emissivity_diag_plots/'
-savedir = root+'NUrad/saves/model/'
+out_dir = root+'figures/'
+savedir = root+'saves/model/'
 ;---------------------------------------------------------------------------------------------------------------
 ;---------------------------------------------- DEFINE INPUT PARAMETERS ----------------------------------------
 read_scaling, model, qyear, scaabs, tau, nsersic, sfr, sfr4, sfr6, sfr7, old, old3, old5, bd, ffactor, ffactor4, ffactor6, ffactor7, f_uv, f_uv4, f_uv6, f_uv7, f_BVIK, f_BVIK3, f_BVIK5
@@ -168,14 +168,14 @@ n_items = n_elements(item)
 ;----------------------------------------------------------------------------------------------------------------
 ;-------------------------------------------- GET DUST EMISSION DATA---------------------------------------------
 FOR j = 0, N_ELEMENTS(wavelength)-1 DO BEGIN	; loop through wavelengths of interest
-if wavelength[j] ne '850' then continue
+if wavelength[j] ne '500' then continue
 FOR i = 0, n_elements(item)-1 DO BEGIN	; loop through morphological components
-RESTORE, em_dir+'grid_'+item(i)+'_'+model+'_q'+qyear+'_t'+stau+'_s'+strsfr+'_no'+strold+'_bd'+strbd+'_hd'+shd+'_zd'+szd+'_hd1_'+shd1+'_zd1_'+szd1+'_hs'+shs+'_zs'+szs+'_hs1_'+shs1+'_zs1_'+szs1+'_reff'+sreff+'_ell'+sellipt+'_'+scaabs+'.xdr'
+RESTORE, em_dir+'grid_'+item[i]+'_'+model+'_q'+qyear+'_t'+stau+'_s'+strsfr+'_no'+strold+'_bd'+strbd+'_hd'+shd+'_zd'+szd+'_hd1_'+shd1+'_zd1_'+szd1+'_hs'+shs+'_zs'+szs+'_hs1_'+shs1+'_zs1_'+szs1+'_reff'+sreff+'_ell'+sellipt+'_'+scaabs+'.xdr'
 endfor
 z_height = 0.d		;defines height of z being looked at
 radius = WHERE(zzz EQ z_height)	;finds the all radii at the given z_height
 lam = lambda/1E4	;converts lambda values to microns
-wave_arr = MIN(ABS(lam-wavelength(j)),posi)	;finds the closest wavelength to the input wavelength
+wave_arr = MIN(ABS(lam-wavelength[j]),posi)	;finds the closest wavelength to the input wavelength
 
 emiss_irr1 = lumdouble1[radius,z_height,posi]	; main thick disk
 emiss_irr2 = lumdouble2[radius,z_height,posi]	; main thin disk
@@ -188,14 +188,13 @@ emiss_tot = emiss_irr1+emiss_irr2+emiss_irr3+emiss_irr4+emiss_irr5+emiss_irr6	; 
 ;-------------------------------------------------- SAVE & PLOT ------------------------------------------------
 ymax = MAX(emiss_tot) * 1.5	;determines 150% maximum value of emiss_tot for plotting range
 ymin = ymax * 1e-7
-r_range = rrr(radius)*1E-3	;defines the plotting range of the radius and converts from pc to kpc
+r_range = rrr[radius]*1E-3	;defines the plotting range of the radius and converts from pc to kpc
 
-save_name = savedir+model+'_diag_'+wavelength(j)+'um.save'
+save_name = savedir+model+'_diag_'+wavelength[j]+'um.save'
 SAVE, r_range, emiss_tot, emiss_irr1, emiss_irr2, emiss_irr3, emiss_irr4, emiss_irr5, emiss_irr6, FILENAME=save_name
 PRINT, 'Saved: '+save_name
-continue
-filename = out_dir+'radial_emissivity_'+STRTRIM(wavelength(j),1)+'um.ps'
-header = STRTRIM(wavelength(j),1)+'$\mu$m at z='+STRTRIM(fix(z_height),1)+'pc'
+filename = out_dir+'radial_emissivity_'+STRTRIM(wavelength[j],1)+'um.ps'
+header = STRTRIM(wavelength[j],1)+'$\mu$m at z='+STRTRIM(fix(z_height),1)+'pc'
 y_name = 'Luminosity [Arb. units]'
 
 aspect = cgPSWINDOW()

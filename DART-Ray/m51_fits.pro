@@ -213,14 +213,14 @@ FOR i = 0, N_ELEMENTS(morph)-1 DO BEGIN
 	FOR k = 0, N_ELEMENTS(wavelength)-1 DO BEGIN
 		map[*,*] = data[*,*,k]
 		outputname = outdir+model+'_map_'+morph[i]+'_'+wavelength[k]+'um_'+scaabs+'.fits'      ;directory and name of output
-		FXADDPAR, header, 'SIMPLE', 'T'
-		FXADDPAR, header, 'BITPIX', -32
-		FXADDPAR, header, 'NAXIS', SIZE(map, /N_DIMENSIONS) 
-		FXADDPAR, header, 'NAXIS1', nx
-		FXADDPAR, header, 'NAXIS2', ny
-		FXADDPAR, header, 'CDELT1', pixsize_deg[0]
-		FXADDPAR, header, 'CDELT2', pixsize_deg[0]
-	        writefits, outputname, map, header      ;writes the fits file
+		;FXADDPAR, header, 'SIMPLE', 'T'
+		;FXADDPAR, header, 'BITPIX', -32
+		;FXADDPAR, header, 'NAXIS', SIZE(map, /N_DIMENSIONS) 
+		;FXADDPAR, header, 'NAXIS1', nx
+		;FXADDPAR, header, 'NAXIS2', ny
+		;FXADDPAR, header, 'CDELT1', pixsize_deg[0]
+		;FXADDPAR, header, 'CDELT2', pixsize_deg[0]
+	        writefits, outputname, map;, header      ;writes the fits file
 	        PRINT, 'WRITTEN: ' + outputname
 	ENDFOR
 	PRINT, ''
