@@ -434,9 +434,9 @@ cgplot, x_rad_model, av_int_rad_HII4, linestyle=1, color='cyan', /overplot
 cgplot, x_rad_model, av_int_rad_tot,  linestyle=0, color='red', /overplot
 
 if wavelength[i] eq 3.6 or wavelength[i] eq 4.5 or wavelength[i] eq 5.8 then begin
-	cgLegend, colors=['black','red','green','orange','blue','green','orange','blue','cyan'], $
-        linestyle=[0,0,2,2,2,1,1,1,1], $
-        title=['obs','model','inner thin','main thin','outer thin','inner thick','main thick','outer thick','HII'],$
+	cgLegend, colors=['black','red','green','orange','blue','green','orange','blue','cyan','purple'], $
+        linestyle=[0,0,2,2,2,1,1,1,1,1], $
+        title=['obs','model','inner thin','main thin','outer thin','inner thick','main thick','outer thick','HII','bulge'],$
         length=0.03, location=[0.75,0.9], vspace=4
 endif else begin
 	cgLegend, colors=['black','red','grey','grey','cyan'],$
