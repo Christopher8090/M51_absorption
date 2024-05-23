@@ -28,3 +28,9 @@ The quickest way to change these strings is using the sed command, e.g. `> sed -
 4. Run `m51_fits.pro`. The previous step has now produced the data cubes containing the surface brightness maps as viewed at the specified angle, this program now writes these outputs as .fits files (in units of [MJy/sr]).
 
 5. Run `m51_phot.pro`. Now the surface brightness maps have been made, the photometry can be done to produce the azimuthally averaged surface brightness profiles.
+
+
+sed -i 's/wd01_q06_t254_s790_no260_bd1_hd6000_zd160_hd1_4300_zd1_90_hs3800_zs190_hs1_4300_zs1_90_reff350_ell145_abs/wd01_q06_t177_s575_no240_bd3_hd6800_zd160_hd1_6000_zd1_90_hs4400_zs190_hs1_6000_zs1_90_reff350_ell145_abs/g' input_grid_2dto3d_m51_*.in
+
+wd01_q06_t254_s790_no260_bd1_hd6000_zd160_hd1_4300_zd1_90_hs3800_zs190_hs1_4300_zs1_90_reff350_ell145_abs
+wd01_q06_t177_s575_no240_bd3_hd6800_zd160_hd1_6000_zd1_90_hs4400_zs190_hs1_6000_zs1_90_reff350_ell145_abs

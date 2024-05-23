@@ -1,5 +1,6 @@
 # FC = HDF5_FLINKER=scorep-mpif90 HDF5_FC=scorep-mpif90 h5fc 
-FC = HDF5_FLINKER=mpif90 HDF5_FC=mpif90  /usr/bin/h5fc 
+#FC = HDF5_FLINKER=mpif90 HDF5_FC=mpif90  /opt/homebrew/bin/h5fc 
+FC = /opt/homebrew/bin/gfortran 
 #FC = h5fc
 # standard intel compilation
 #FCFLAGS = -g -O3 -xHost -align -ansi-alias -mcmodel=medium -traceback -fopenmp -lmpi
@@ -8,7 +9,8 @@ FC = HDF5_FLINKER=mpif90 HDF5_FC=mpif90  /usr/bin/h5fc
 #FCFLAGS= -O3 -ipo -fopenmp -heap-arrays
 # standard gfortran compilation 
 #FCFLAGS= -O3 -fopenmp -ffree-line-length-none
-FCFLAGS= -I"/usr/lib64/gfortran/modules" -O3 -fopenmp -ffree-line-length-none
+#FCFLAGS= -I"/usr/lib64/gfortran/modules" -O3 -fopenmp -ffree-line-length-none
+FCFLAGS= -I"/opt/homebrew/Cellar/open-mpi/4.1.4_2/include/" -O2 -fopenmp -ffree-line-length-none
 # compilation with error checking and traceback
 #FCFLAGS= -O3 -fopenmp -traceback -check all  
 #FCFLAGS= -O3 -fopenmp -traceback -check all -check noarg_temp_created

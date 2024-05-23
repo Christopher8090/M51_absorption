@@ -801,7 +801,7 @@ do i=1,clvl
    ib=2    
       j=iand((cindex(nc))/(basediv(1)*basediv(2)**(i-2)),basemask(2))-1
    else
-     j=iand((cindex(nc))/(basediv(1)**(i-1)),basemask(1))-1
+      j=iand((cindex(nc))/(basediv(1)**(i-1)),basemask(1))-1
    endif 
      ccindd(1,i)=mod(j,base(ib))
      ccindd(2,i)=mod(j/base(ib),base(ib))
