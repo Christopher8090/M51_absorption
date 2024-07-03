@@ -244,6 +244,7 @@ IF lambda[i] EQ 22000. THEN obs_data = '2.200'	; i = 13
 IF lambda[i] EQ 36000. THEN obs_data = '3.507'	; i = 14
 IF lambda[i] EQ 45000. THEN obs_data = '4.437'	; i = 15
 IF lambda[i] EQ 58000. THEN obs_data = '5.739'	; i = 16
+if obs_data ne '0.4719' then continue
 savewave = ['uv09','uv13','GALEX_FUV','uv16','uv20','GALEX_NUV','uv25','uv28','SDSS_u','SDSS_g','SDSS_r','SDSS_i','2MASS_J','2MASS_K','IRAC_3.6','IRAC_4.5','IRAC_5.8']
 
 IF obs_data NE '' THEN BEGIN
@@ -749,6 +750,25 @@ sxaddpar, hd_out, 'CDELT2', pixsize_deg
 cal_map_name = map_dir+model+'_calibrated_map_'+wavelength+conv_affix+'.fits'
 ;writefits, cal_map_name, cal_map_tot;, hd_out
 ;print, 'Write: '+cal_map_name
+;-----------------------------------------------------------------------------------------
+if savewave[i] eq 'GALEX_NUV' or savewave[i] eq 'SDSS_g' or savewave[i] eq '2MASS_Ks' then begin
+map_lim = 30d+3
+map_lim_pix = map_lim / pixsize_pc
+cal_map_tot_temp = dblarr(map_lim_pix, map_lim_pix)
+for ii = 0, map_lim_pix-1 do begin
+for jj = 0, map_lim_pix-1 do begin
+        xpos = xc - (map_lim_pix/2) +ii
+        ypos = yc - (map_lim_pix/2) +jj
+        cal_map_tot_temp[ii,jj] = cal_map_tot[xpos,ypos]
+endfor
+endfor
+cal_map_tot_temp = rot(cal_map_tot_temp, 78., /interp)
+writefits, '../../maps/model_'+savewave[i]+'.fits', cal_map_tot_temp
+print, 'written: ../../maps/model_'+savewave[i]+'.fits'
+help, cal_map_tot_temp
+endif
+stop
+;-----------------------------------------------------------------------------------------
 ;---------------------------------- CHI-SQUARED TEST -------------------------------------
 IF obs_data EQ '' THEN BEGIN
 	chi_sqr_r = 0
