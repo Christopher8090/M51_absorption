@@ -510,18 +510,18 @@ atten_lim = where(wave_option eq 'uv36')
 dwave = (wavelength_nurad[atten_lim] - min(wavelength_nurad))/nwave	; interpolated wavelengths between limits
 wave_interp = wavelength_nurad[0] + dwave[0]*findgen(nwave)   ; sets the interpolated wavelengths
 
-atten_global_interp = spline(wavelength_nurad, atten_global, wave_interp, 50)
-atten_bulge_interp = spline(wavelength_nurad, atten_bulge, wave_interp, 50)
-atten_inner_interp = spline(wavelength_nurad, atten_inner, wave_interp, 50)
-atten_main_interp = spline(wavelength_nurad, atten_main, wave_interp, 50)
-atten_outer_interp = spline(wavelength_nurad, atten_outer, wave_interp, 50)
+;atten_global_interp = spline(wavelength_nurad, atten_global, wave_interp, 50)
+;atten_bulge_interp = spline(wavelength_nurad, atten_bulge, wave_interp, 50)
+;atten_inner_interp = spline(wavelength_nurad, atten_inner, wave_interp, 50)
+;atten_main_interp = spline(wavelength_nurad, atten_main, wave_interp, 50)
+;atten_outer_interp = spline(wavelength_nurad, atten_outer, wave_interp, 50)
 
-wave_interp = [wave_interp[*], wavelength_nurad[atten_lim+1:*]]
-atten_global_interp = [atten_global_interp[*], atten_global[atten_lim+1:*]]
-atten_bulge_interp = [atten_bulge_interp[*], atten_inner[atten_lim+1:*]]
-atten_inner_interp = [atten_inner_interp[*], atten_inner[atten_lim+1:*]]
-atten_main_interp = [atten_main_interp[*], atten_main[atten_lim+1:*]]
-atten_outer_interp = [atten_outer_interp[*], atten_outer[atten_lim+1:*]]
+;wave_interp = [wave_interp[*], wavelength_nurad[atten_lim+1:*]]
+;atten_global_interp = [atten_global_interp[*], atten_global[atten_lim+1:*]]
+;atten_bulge_interp = [atten_bulge_interp[*], atten_inner[atten_lim+1:*]]
+;atten_inner_interp = [atten_inner_interp[*], atten_inner[atten_lim+1:*]]
+;atten_main_interp = [atten_main_interp[*], atten_main[atten_lim+1:*]]
+;atten_outer_interp = [atten_outer_interp[*], atten_outer[atten_lim+1:*]]
 
 atten_outname = save_dir+model+'_atten_curve.save'
 wave = wavelength_nurad
@@ -716,8 +716,8 @@ plot_check = 1
 if plot_check eq 1 then begin
 xmin = 0.09
 xmax = 6
-ymax = max(app_flux) *1.8
-ymin = ymax*2e-5
+ymax = max(app_flux) *4.0
+ymin = ymax*2e-4
 plotname = figdir+'sed_'+model+'_'+scaabs+'.ps'
 aspect = cgpswindow()
 thisdevice = !D.NAME
