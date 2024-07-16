@@ -13,7 +13,7 @@ set dr_req=100.
 set dz_req=25.
 
 cd ../../emission_NUrad/prog
-/applications/idl/current/idl/bin/idl <<eof
+/home/doktor/Source/GDL/gdl/install/bin/gdl <<eof
 read_scaling
 @init
 radiation_fields_template,$swdisk3,$swdisk4,$swdisk5,$swdisk6,$swdisk7

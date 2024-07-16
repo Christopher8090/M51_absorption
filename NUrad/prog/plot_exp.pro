@@ -1,4 +1,4 @@
-pro plot_exp, hs
+pro plot_exp, hs, hstin, hsin, rtruncate, xis
 compile_opt idl2
 
 ; This program plots the function form of the exponential disk geometry. Currently all parameters are hard-coded
@@ -10,16 +10,16 @@ compile_opt idl2
 ;	- hs, scale length (gradient of the pure exponential region)
 
 ; restore SB profile to fit an exponential to
-data = 'datafile_0.2274um.save'
+data = '../../saves/obs/datafile_0.1542um.save'
 restore, data
 
 ; geometry parameters
-A = 1.		; this is an arbitrary value used to adjust the plots to overlap
+A = 1		; this is an arbitrary value used to adjust the plots to overlap
 ;hs = 1.		; scale length (gradient of the pure exponential region)
-rtruncate = 5.	; outer truncation radius
-hstin = 1.	; inner truncation radius
-hsin = 2.	; inner radius
-xis = 0.	; defines gradient in the region hstin <= r < rtruncate
+;rtruncate = 5.	; outer truncation radius
+;hstin = 1.	; inner truncation radius
+;hsin = 2.	; inner radius
+;xis = 0.	; defines gradient in the region hstin <= r < rtruncate
 sharp = 0.01	; smoothing factor to define curve at r = rtruncate
 
 ; intialse arrays to hold the exponential profile
