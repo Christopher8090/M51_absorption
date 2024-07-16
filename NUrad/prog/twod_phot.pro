@@ -841,7 +841,7 @@ cgplot, [xmin,xmax], [0,0], color="black", /overplot
 cgplot, x_rad_model, resi, color='red', /overplot
 
 device, /close_file
-cgfixps, plotname
+;cgfixps, plotname
 print, 'SAVED: '+plotname
 endif
 ;-----------------------------------------------------------------------------------------
