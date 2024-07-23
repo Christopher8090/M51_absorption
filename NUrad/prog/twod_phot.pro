@@ -801,7 +801,7 @@ if obs_data ne '' then begin	; only plots if obs data is present
 xmin = 0
 xmax = 17.5
 ymax = max(av_int_rad_model, /NaN) *1.5
-ymin = ymax * 1e-3
+ymin = ymax * 1e-4
 plotname = figdir+model+'_sb_profile_'+wavelength+'_'+scaabs+'.ps'
 IF stau EQ 0 THEN plotname = figdir+model+'_sb_profile_t0_'+wavelength+'_'+scaabs+'.ps'
 ;plotname = figdir+'sb_profile_'+model+'_q'+qyear+'_t'+stau+'_sfr'+strsfr+'_old'+strold+'_bd'+strbd+'_'+savewave[i]+'_'+scaabs+'.ps'
@@ -812,9 +812,11 @@ device, filename=plotname, xsize=aspect.xsize, ysize=aspect.ysize, xoffset=aspec
         color=1, encapsulated=encapsulated, inches=aspect.inches, $
         bits=8, set_character_size=[180,200], set_font='HELVETICA', /landscape
 
-	!p.thick=6
-	!x.thick=3
-	!y.thick=3
+;cgPS_Open, plotname, /COLOR
+
+	!p.thick=4
+	!x.thick=2
+	!y.thick=2
 	!p.charthick=2
 	!p.charsize=1.5
 
@@ -830,9 +832,9 @@ cgplot, x_rad_model, av_int_rad_do,  linestyle=1, color='blue', /overplot
 cgplot, x_rad_model, av_int_rad_model,linestyle=0, color='red', /overplot
 
 cgLegend, colors=['black','red','purple','green','orange','blue','green','orange','blue'], $
-	linestyle=[0,0,1,2,2,2,1,1,1], $
+	linestyle=[0,0,1,2,2,2,1,1,1], thick=3, $
 	title=['obs','model','bulge','inner thin','main thin','outer thin','inner thick','main thick','outer thick'], $
-	length=0.03, location=[0.75,0.9], vspace=4
+	length=0.03, location=[0.75,0.9], vspace=3, charsize=1.5, tt_font='HELVETICA'
 
 cgplot, [xmin,xmax], [20,20], color="blue", linestyle=2, position=[0.17,0.1,0.95,0.25], $
 	ytitle="R [%]", xrange=[xmin,xmax], xtitle='Radius, [kpc]', /NoErase, yrange=[-50,50], yticks=1
@@ -841,6 +843,7 @@ cgplot, [xmin,xmax], [0,0], color="black", /overplot
 cgplot, x_rad_model, resi, color='red', /overplot
 
 device, /close_file
+;cgPS_Close
 ;cgfixps, plotname
 print, 'SAVED: '+plotname
 endif
