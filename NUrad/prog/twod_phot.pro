@@ -832,7 +832,7 @@ cgplot, x_rad_model, av_int_rad_do,  linestyle=1, color='blue', /overplot
 cgplot, x_rad_model, av_int_rad_model,linestyle=0, color='red', /overplot
 
 cgLegend, colors=['black','red','purple','green','orange','blue','green','orange','blue'], $
-	linestyle=[0,0,1,2,2,2,1,1,1], thick=3, $
+	linestyle=[0,0,1,2,2,2,1,1,1], thick=2, $
 	title=['obs','model','bulge','inner thin','main thin','outer thin','inner thick','main thick','outer thick'], $
 	length=0.03, location=[0.75,0.9], vspace=3, charsize=1.5, tt_font='HELVETICA'
 

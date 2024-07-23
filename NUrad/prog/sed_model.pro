@@ -726,9 +726,9 @@ device, filename=plotname, xsize=aspect.xsize, ysize=aspect.ysize, xoffset=aspec
         color=1, encapsulated=encapsulated, inches=aspect.inches, $
         bits=8, set_character_size=[180,200], set_font='HELVETICA', /landscape
 
-        !p.thick=6
-        !x.thick=3
-        !y.thick=3
+        !p.thick=4
+        !x.thick=2
+        !y.thick=2
         !p.charthick=2
         !p.charsize=1.5
 
@@ -743,16 +743,16 @@ cgplot, wavelength_nurad, int_flux_tot, color='purple', linestyle=0, /overplot
 cgscatter2d, wavelength, int_jy, fit=0, /overplot	; scatter plot of corresponding SED
 
 cglegend, colors=['red','purple','black'], linestyle=[0,0,2], title=['Apparent flux','Intrinsic flux','Data'], $
-        length = 0.05, location=[0.2,0.9], vspace=4
+        length = 0.05, location=[0.2,0.9], vspace=4, charsize=1.5, tt_font='HELVETICA', thick=2
 
 cgplot, [xmin,xmax], [20,20], color="black", linestyle=2, position=[0.17,0.1,0.95,0.25], $
-        ytitle="R [%]", xrange=[xmin,xmax], xtitle='Wavelength, $\lambda$ [$\mu$m]', /NoErase, yrange=[-50,50], yticks=1, /xlog
+        ytitle="R [%]", xrange=[xmin,xmax], xtitle='Wavelength, <lambda> [µm]', /NoErase, yrange=[-50,50], yticks=1, /xlog
 cgplot, [xmin,xmax], [-20,-20], color="black", linestyle=2, /overplot
 cgplot, [xmin,xmax], [0,0], color="black", /overplot
 cgscatter2d, wavelength, resi, fit=0, /overplot
 
 device, /close_file
-cgfixps, plotname
+;cgfixps, plotname
 print, 'SAVED: '+plotname
 endif
 ;--------------------------------------------------------------------------------------------------------------
