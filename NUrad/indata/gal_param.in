@@ -3,7 +3,7 @@ diagnostics(0=no,1=yes)
 prof_lim[kpc]
 25.
 izero(0=abs,10=sca)
-0
+10
 dust_model(wd01_q06/pop00_q01)
 wd01_q06
 dist[Mpc]
